@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Telefoons</title>
+    <link href="~/Style/bootstrap.css" rel="stylesheet" />
+    <link href="~/Style/bootstrap.min.css" rel="stylesheet" /></head>
+<body>
+        @foreach (var item in ViewBag.Telefoons)
+        {
+            <div class="row">
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <div class="thumbnail">
+                        <img src="@item.Afbeeldingen" alt="">
+                        <div class="caption">
+                            <h4 class="pull-right">@item.Prijs</h4>
+                            <h4>
+                                <a href="@Url.Action("Index","Product", new { product = @item.ProductID})">@item.Naam</a>
+                            </h4>
+                            <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+</body>
+</html>

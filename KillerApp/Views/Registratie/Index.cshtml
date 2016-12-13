@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Registreren</title>
+    <link href="~/StyleSheet1.css" rel="stylesheet">
+    <script src="~/scripts/JavaScript.js"></script>
+</head>
+<body>
+    <div class="container">
+        <form class="form-horizontal" role="form" action="/Registratie/Registreren">
+            <h2>Registreren</h2>
+            <div class="form-group">
+                <label for="Voornaam" class="col-sm-3 control-label">Voornaam</label>
+                <div class="col-sm-9">
+                    <input type="text" id="Voornaam" placeholder="Voornaam" class="form-control" name="Voornaam" autofocus />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Achternaam" class="col-sm-3 control-label">Achternaam</label>
+                <div class="col-sm-9">
+                    <input type="text" id="Achternaam" placeholder="Achternaam" class="form-control" name="Achternaam" autofocus />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-sm-3 control-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="email" id="email" placeholder="Email" class="form-control" name="Email" autofocus/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Wachtwoord" class="col-sm-3 control-label">Wachtwoord</label>
+                <div class="col-sm-9">
+                    <input type="password" id="Wachtwoord" placeholder="Wachtwoord" class="form-control" name="Wachtwoord" autofocus/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="WachtwoordBevestigen" class="col-sm-3 control-label">Wachtwoord bevestigen</label>
+                <div class="col-sm-9">
+                    <input type="password" id="WachtwoordBevestigen" placeholder="Wachtwoord bevestigen" class="form-control" autofocus/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Geboortedatum" class="col-sm-3 control-label">Geboortedatum</label>
+                <div class="col-sm-9">
+                    <input type="date" id="Geboortedatum" class="form-control" name="Geboortedatum" autofocus/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Woonplaats" class="col-sm-3 control-label">Woonplaats</label>
+                <div class="col-sm-9">
+                    <input type="text" id="Woonplaats" class="form-control" name="Woonplaats" autofocus/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Straat" class="col-sm-3 control-label">Straat</label>
+                <div class="col-sm-9">
+                    <input type="text" id="Straat" placeholder="Straat" class="form-control" name="Straat" autofocus/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Huisnummer" class="col-sm-3 control-label">Huisnummer</label>
+                <div class="col-sm-9">
+                    <input type="number" id="Huisnummer" placeholder="0" class="form-control" name="Huisnummer" autofocus/>
+                </div>
+            </div>
+        <div class="form-group">
+            <label for="Postcode" class="col-sm-3 control-label">Postcode</label>
+            <div class="col-sm-9">
+                <input type="text" id="Postcode" placeholder="0000AA" class="form-control" name="Postcode" autofocus/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Telefoonnummer" class="col-sm-3 control-label">Telefoonnummer</label>
+            <div class="col-sm-9">
+                <input type="tel" id="Telefoonnummer" placeholder="0612345678" class="form-control" name="Telefoonnummer" autofocus/>
+            </div>
+        </div>
+            <div class="form-group">
+                <div class="col-sm-9 col-sm-offset-3">
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </div>
+            </div>
+        <script type="text/javascript">
+            RegistratieAlert(ViewBag.Alert)
+        </script>
+        </form> <!-- /form -->
+    </div> <!-- ./container -->
+</body>
+</html>
