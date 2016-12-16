@@ -4,12 +4,29 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <link href="~/Style/bootstrap.css" rel="stylesheet" />
+    <link href="~/Style/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
     <div>
         <h1>
-        @ViewBag.Product.Naam
-        </h1> 
+            @ViewBag.Product.Naam
+        </h1>
+        @foreach (var item in ViewBag.Specificatie)
+        {
+            <div class="row">
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                <h6>Kleur: @item.Kleur</h6> <br />
+                <h6>Geheugen: @item.Geheugen</h6> <br />
+                <h6>Bluetooth: @item.Bluetooth</h6> <br />
+                <h6>WiFi: @item.WiFi </h6><br />
+                <h6>3G: @item.DrieG </h6><br />
+                <h6>4G; @item.VierG </h6><br />
+                <h6>Amphere: @item.Amphere </h6><br />
+                <h6>Draadloos: @item.Draadloos </h6><br />
+                </div>
+            </div>
+        }
     </div>
 </body>
 </html>

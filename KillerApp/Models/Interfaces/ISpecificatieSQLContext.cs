@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace KillerApp.Models.Interfaces
 {
-    interface ISpecificatieSQLContext
+    public interface ISpecificatieSQLContext
     {
-        Specificatie SpecificatieBijID(int productID);
+        List<Specificatie> SpecificatieBijProduct(int productID);
     }
 }

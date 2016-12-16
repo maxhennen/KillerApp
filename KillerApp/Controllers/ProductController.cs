@@ -1,4 +1,5 @@
 ﻿using KillerApp.Models;
+using KillerApp.Models.Domain_Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,12 @@ namespace KillerApp.Controllers
     public class ProductController : Controller
     {
         // GET: Product
-        public ActionResult Index(int product)
+        public ActionResult Index(int productID)
         {
             Producten producten = new Producten();
-            ViewBag.Product = producten.ProductBijID(product);
-            ViewBag.Specificatie = product.Specificatiee(product);
+            ViewBag.Product = producten.ProductBijID(productID);
+            Specificatie specificatie = new Specificatie();
+            ViewBag.Specificatie = specificatie.SpecificatieBijProduct(productID);
             return View();
         }
     }

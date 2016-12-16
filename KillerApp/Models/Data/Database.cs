@@ -9,7 +9,7 @@ namespace KillerApp.Models
 {
     public class Database
     {
-        private static string connectionString = "Data Source=Laptop-Max;Initial Catalog=FunData;Integrated Security=True";
+        private static string connectionString = "Data Source=LAPTOP-MAX;Initial Catalog=Fun;Integrated Security=True";
         public static SqlConnection Connection
         {
             get

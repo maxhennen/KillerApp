@@ -134,6 +134,7 @@
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\jquery.js" />
+    <Content Include="Style\Stylesheet.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

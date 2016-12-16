@@ -14,7 +14,7 @@ namespace KillerApp.Data
         public List<Producten> AlleTelefoons()
         {
             List<Producten> producten = new List<Producten>();
-            string query = "SELECT * From Producten WHERE Soort Like 'Telefoon' ";
+            string query = "SELECT * FROM (SELECT  p.Afbeeldingen,p.Merk,p.Naam,p.ProductID,p.Soort,p.Telefoon_ProductID,p.Voorraad_VoorraadID,s.Prijs,ROW_NUMBER() OVER(PARTITION BY p.Naam ORDER BY p.ProductID DESC) rn FROM Producten p join ProductSpecificaties ps on ps.Producten_ProductID = p.ProductID join Specificaties s on s.SpecificatieID = ps.Specificaties_SpecificatieID) a WHERE rn = 1;";
             using (SqlConnection conn = Database.Connection)
             {
               using(SqlCommand cmd = new SqlCommand(query, conn))
@@ -34,7 +34,7 @@ namespace KillerApp.Data
         public List<Producten> ProductenHomepage()
         {
             List<Producten> producten = new List<Producten>();
-            string query = "select * from ( select top 3 * from Producten  ) x  order by Prijs desc; ";
+            string query = "select * from ( select top 3 p.*, s.Prijs  from Producten p join ProductSpecificaties ps on ps.Producten_ProductID = p.ProductID join Specificaties s on s.SpecificatieID = ps.Specificaties_SpecificatieID order by s.Prijs desc) x;";
             using(SqlConnection conn = Database.Connection)
             {
                 using(SqlCommand cmd = new SqlCommand(query, conn))
