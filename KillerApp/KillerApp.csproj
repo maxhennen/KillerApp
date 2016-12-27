@@ -175,10 +175,11 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Master.cshtml" />
     <Content Include="Views\Telefoons\Index.cshtml" />
     <Content Include="Views\Registratie\Index.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Home\Home.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

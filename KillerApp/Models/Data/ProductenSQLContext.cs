@@ -11,10 +11,12 @@ namespace KillerApp.Data
 {
     class ProductenSQLContext : IProductenSQLContext
     {
+        private Producten product;
+
         public List<Producten> AlleTelefoons()
         {
             List<Producten> producten = new List<Producten>();
-            string query = "SELECT * FROM (SELECT  p.Afbeeldingen,p.Merk,p.Naam,p.ProductID,p.Soort,p.Telefoon_ProductID,p.Voorraad_VoorraadID,s.Prijs,ROW_NUMBER() OVER(PARTITION BY p.Naam ORDER BY p.ProductID DESC) rn FROM Producten p join ProductSpecificaties ps on ps.Producten_ProductID = p.ProductID join Specificaties s on s.SpecificatieID = ps.Specificaties_SpecificatieID) a WHERE rn = 1;";
+            string query = "SELECT * FROM (SELECT  p.Afbeeldingen,p.Merk,p.Naam,p.ProductID,p.Soort,p.Telefoon_ProductID,s.Prijs,ROW_NUMBER() OVER(PARTITION BY p.Naam ORDER BY p.ProductID DESC) rn FROM Producten p join ProductSpecificatiesVoorraad ps on ps.Producten_ProductID = p.ProductID join Specificaties s on s.SpecificatieID = ps.Specificaties_SpecificatieID ) a WHERE rn = 1";
             using (SqlConnection conn = Database.Connection)
             {
               using(SqlCommand cmd = new SqlCommand(query, conn))
@@ -31,10 +33,30 @@ namespace KillerApp.Data
             return producten;
         }
 
+        public Producten ProductBijID(int productID)
+        {
+            string query = "SELECT s.Prijs, p.* FROM Specificaties s JOIN ProductSpecificatiesVoorraad ps ON ps.Specificaties_SpecificatieID = s.SpecificatieID JOIN Producten p ON p.ProductID = ps.Producten_ProductID WHERE p.ProductID = @ProductID";
+            using(SqlConnection conn = Database.Connection)
+            {
+                using(SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ProductID", productID);
+                    using(SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            product = CreateProductFromReader(reader);
+                        }
+                    }
+                }
+            }
+            return product;
+        }
+
         public List<Producten> ProductenHomepage()
         {
             List<Producten> producten = new List<Producten>();
-            string query = "select * from ( select top 3 p.*, s.Prijs  from Producten p join ProductSpecificaties ps on ps.Producten_ProductID = p.ProductID join Specificaties s on s.SpecificatieID = ps.Specificaties_SpecificatieID order by s.Prijs desc) x;";
+            string query = "select * from ( select top 3 p.*, s.Prijs  from Producten p join ProductSpecificatiesVoorraad ps on ps.Producten_ProductID = p.ProductID join Specificaties s on s.SpecificatieID = ps.Specificaties_SpecificatieID order by s.Prijs desc) x;";
             using(SqlConnection conn = Database.Connection)
             {
                 using(SqlCommand cmd = new SqlCommand(query, conn))
@@ -50,26 +72,7 @@ namespace KillerApp.Data
             }
             return producten;
         }
-        public Producten ProductBijID(int productID)
-        {
-            Producten product = new Producten();
-            string query = "Select * From Producten WHERE ProductID = @ProductID";
-            using (SqlConnection conn = Database.Connection)
-            {
-                using(SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@ProductID", productID);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            product = CreateProductFromReader(reader);
-                        }
-                    }
-                }
-            }
-            return product;
-        }
+        
         private Producten CreateProductFromReader(SqlDataReader reader)
         {
                 if (reader["Telefoon_ProductID"] != DBNull.Value)
@@ -79,7 +82,6 @@ namespace KillerApp.Data
                 Convert.ToString(reader["Naam"]),
                 Convert.ToDecimal(reader["Prijs"]),
                 Convert.ToString(reader["Merk"]),
-                Convert.ToInt32(reader["Voorraad_VoorraadID"]),
                 Convert.ToString(reader["Afbeeldingen"]),
                 Convert.ToInt32(reader["Telefoon_ProductID"]));
 ;
@@ -91,7 +93,6 @@ namespace KillerApp.Data
                 Convert.ToString(reader["Naam"]),
                 Convert.ToDecimal(reader["Prijs"]),
                 Convert.ToString(reader["Merk"]),
-                Convert.ToInt32(reader["Voorraad_VoorraadID"]),
                 Convert.ToString(reader["Afbeeldingen"]),
                 0);
             }

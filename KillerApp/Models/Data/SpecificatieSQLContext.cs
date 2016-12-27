@@ -15,7 +15,7 @@ namespace KillerApp.Models.Data
             List<Specificatie> specificaties = new List<Specificatie>();
             using(SqlConnection conn = Database.Connection)
             {
-                string query = "SELECT * FROM Specificaties s JOIN ProductSpecificaties ps ON ps.Specificaties_SpecificatieID = s.SpecificatieID JOIN Producten p ON p.ProductID = ps.Producten_ProductID WHERE p.ProductID = @ProductID";
+                string query = "SELECT s.*, p.Naam FROM Specificaties s JOIN ProductSpecificatiesVoorraad ps ON ps.Specificaties_SpecificatieID = s.SpecificatieID JOIN Producten p ON p.ProductID = ps.Producten_ProductID WHERE p.ProductID = @ProductID";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@ProductID", productID);
                 using(SqlDataReader reader = cmd.ExecuteReader())
@@ -31,7 +31,7 @@ namespace KillerApp.Models.Data
         private Specificatie CreateSpecificatieFromReader(SqlDataReader reader)
         {
             return new Specificatie(
-            Convert.ToInt32(reader["SpecificatieID"]),
+            Convert.ToString(reader["Naam"]),
             Convert.ToString(reader["Kleur"]),
             Convert.ToBoolean(reader["Bluetooth"]),
             Convert.ToInt32(reader["Geheugen"]),
@@ -39,7 +39,8 @@ namespace KillerApp.Models.Data
             Convert.ToBoolean(reader["DrieG"]),
             Convert.ToBoolean(reader["VierG"]),
             Convert.ToBoolean(reader["Draadloos"]),
-            Convert.ToDecimal(reader["Amphere"])); 
+            Convert.ToDecimal(reader["Amphere"]),
+            Convert.ToDecimal(reader["Prijs"])); 
         }
     }
 }

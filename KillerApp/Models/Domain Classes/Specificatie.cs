@@ -9,6 +9,7 @@ namespace KillerApp.Models.Domain_Classes
 {
     public class Specificatie
     {
+        public string TelefoonNaam { get; private set; }
         public int SpecificatieID { get; private set; }
         public string Kleur { get; private set; }
         public bool Bluetooth { get; private set; }
@@ -18,10 +19,11 @@ namespace KillerApp.Models.Domain_Classes
         public bool VierG { get; private set; }
         public bool Draadloos { get; private set; }
         public decimal Amphere { get; private set; }
+        public decimal Prijs { get; private set; }
         private SpecificatieRepository  SpecificatieRepo;
 
         public Specificatie(int specificatieId, string kleur, bool bluetooth, int geheugen, bool wifi, bool drieG, bool vierG,
-            bool draadloos, decimal amphere)
+            bool draadloos, decimal amphere,decimal prijs)
         {
             SpecificatieID = specificatieId;
             Kleur = kleur;
@@ -32,6 +34,22 @@ namespace KillerApp.Models.Domain_Classes
             VierG = vierG;
             Draadloos = draadloos;
             Amphere = amphere;
+            Prijs = prijs;
+        }
+
+        public Specificatie(string telefoonNaam, string kleur, bool bluetooth, int geheugen, bool wifi, bool drieG, bool vierG,
+            bool draadloos, decimal amphere, decimal prijs)
+        {
+            TelefoonNaam = telefoonNaam;
+            Kleur = kleur;
+            Bluetooth = bluetooth;
+            Geheugen = geheugen;
+            WiFi = wifi;
+            DrieG = drieG;
+            VierG = vierG;
+            Draadloos = draadloos;
+            Amphere = amphere;
+            Prijs = prijs;
         }
 
         public Specificatie()

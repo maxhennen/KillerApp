@@ -15,7 +15,6 @@ namespace KillerApp.Models
         public decimal Prijs { get; private set; }
         public string Merk { get; private set; }
         public string  Afbeeldingen { get; private set; }
-        public int VoorraadID { get; private set; }
         public int TelefoonID { get; private set; }
 
         private ProductenRepository productenRepo;
@@ -24,24 +23,13 @@ namespace KillerApp.Models
 
         }
 
-        public Producten(int productId, string naam, decimal prijs, string merk, int voorraadId, string afbeeldingen)
+        public Producten (int productId, string naam, decimal prijs, string merk, string afbeeldingen, int telefoonId)
         {
             ProductID = productId;
             Naam = naam;
             Prijs = prijs;
             Merk = merk;
             Afbeeldingen = afbeeldingen;
-            VoorraadID = voorraadId;
-        }
-
-        public Producten (int productId, string naam, decimal prijs, string merk, int voorraadId, string afbeeldingen, int telefoonId)
-        {
-            ProductID = productId;
-            Naam = naam;
-            Prijs = prijs;
-            Merk = merk;
-            Afbeeldingen = afbeeldingen;
-            VoorraadID = voorraadId;
             TelefoonID = telefoonId;
         }
 
@@ -57,10 +45,10 @@ namespace KillerApp.Models
             return productenRepo.AlleTelefoons();
         }
 
-        public Producten ProductBijID(int productId)
+        public Producten ProductBijID(int productID)
         {
             productenRepo = new ProductenRepository(new ProductenSQLContext());
-            return productenRepo.ProductBijID(productId);
+            return productenRepo.ProductBijID(productID);
         }
 
         public int CompareTo(string naam)

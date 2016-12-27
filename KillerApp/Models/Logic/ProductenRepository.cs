@@ -31,6 +31,6 @@ namespace KillerApp.Logic
         {
             return Context.ProductBijID(productID);
         }
-}
     }
+}
 

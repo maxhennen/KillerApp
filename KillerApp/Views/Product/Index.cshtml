@@ -9,21 +9,23 @@
 </head>
 <body>
     <div>
-        <h1>
-            @ViewBag.Product.Naam
-        </h1>
-        @foreach (var item in ViewBag.Specificatie)
+        <h1>@ViewBag.Product.Naam</h1>
+        <img src="@ViewBag.Product.Afbeeldingen" />
+        @foreach (var item in ViewBag.Specificaties)
         {
             <div class="row">
                 <div class="col-sm-4 col-lg-4 col-md-4">
-                <h6>Kleur: @item.Kleur</h6> <br />
-                <h6>Geheugen: @item.Geheugen</h6> <br />
-                <h6>Bluetooth: @item.Bluetooth</h6> <br />
-                <h6>WiFi: @item.WiFi </h6><br />
-                <h6>3G: @item.DrieG </h6><br />
-                <h6>4G; @item.VierG </h6><br />
-                <h6>Amphere: @item.Amphere </h6><br />
-                <h6>Draadloos: @item.Draadloos </h6><br />
+                    <div class="thumbnail">
+                <p>Kleur: @item.Kleur</p> <br />
+                <p>Geheugen: @item.Geheugen</p> <br />
+                <p>Bluetooth: @item.Bluetooth</p> <br />
+                <p>WiFi: @item.WiFi </p><br />
+                <p>3G: @item.DrieG </p><br />
+                <p>4G; @item.VierG </p><br />
+                <p>Amphere: @item.Amphere </p><br />
+                <p>Draadloos: @item.Draadloos </p><br />
+                <p>Prijs: @item.Prijs</p><br />
+                        </div>
                 </div>
             </div>
         }

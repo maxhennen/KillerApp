@@ -13,10 +13,7 @@ namespace KillerApp.Controllers
         // GET: Product
         public ActionResult Index(int productID)
         {
-            Producten producten = new Producten();
-            ViewBag.Product = producten.ProductBijID(productID);
-            Specificatie specificatie = new Specificatie();
-            ViewBag.Specificatie = specificatie.SpecificatieBijProduct(productID);
+            
             return View();
         }
     }
