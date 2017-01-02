@@ -12,16 +12,12 @@ namespace KillerApp.Data
 {
     class GebruikerSQLContext: IGebruikerSQLContext 
     {
-        int gebruikerID = 0;
-        public bool Registreren(Gebruiker gebruiker)
+        public void Registreren(Gebruiker gebruiker)
         {
-            bool Registratie = false;
-            try
-            {
                 using (SqlConnection conn = Database.Connection)
                 {
-                    string query = "INSERT INTO Gebruiker(GebruikerID,Voornaam,Achternaam,Geboortedatum,Straat,Huisnummer,Postcode,Woonplaats,Email,Telefoon,Wachtwoord,Beheerder)"
-                        + "Values((Select (Max(GebruikerID)+1) FROM Gebruiker),@Voornaam,@Achternaam,@Geboortedatum,@Straat,@Huisnummer,@Postcode,@Woonplaats,@Email,@Telefoon,@Wachtwoord,0)";
+                    string query = "INSERT INTO Gebruiker(GebruikerID,Voornaam,Achternaam,Geboortedatum,Straat,Huisnummer,Postcode,Woonplaats,Email,Telefoon,Wachtwoord,Gebruikerstype)"
+                        + "Values((Select (Max(GebruikerID)+1) FROM Gebruiker),@Voornaam,@Achternaam,@Geboortedatum,@Straat,@Huisnummer,@Postcode,@Woonplaats,@Email,@Telefoon,@Wachtwoord,@Gebruikerstype)";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@Voornaam", gebruiker.Voornaam);
@@ -34,71 +30,30 @@ namespace KillerApp.Data
                         cmd.Parameters.AddWithValue("@Email", gebruiker.Mail);
                         cmd.Parameters.AddWithValue("@Telefoon", gebruiker.Telefoonnummer);
                         cmd.Parameters.AddWithValue("@Wachtwoord", gebruiker.Wachtwoord);
+                        cmd.Parameters.AddWithValue("@Gebruikerstype", "Klant");
+
                         cmd.ExecuteNonQuery();
                     }
                 }
-                Registratie = true;
-            }
-            catch(SqlException)
-            {
-                Registratie = false;
-            }
-            return Registratie;
         } 
 
-        public int Login(string email, string wachtwoord)
+        public Gebruiker Login(Gebruiker gebruiker)
         {
             using (SqlConnection conn = Database.Connection)
             {
-                string query = "SELECT GebruikerID FROM Gebruiker where Email = @email AND Wachtwoord = @ww";
+                string query = "SELECT * FROM Gebruiker where Email = @email AND Wachtwoord = @ww";
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@email", email);
-                cmd.Parameters.AddWithValue("@ww", wachtwoord);
+                cmd.Parameters.AddWithValue("@email", gebruiker.Mail);
+                cmd.Parameters.AddWithValue("@ww", gebruiker.Wachtwoord);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        gebruikerID = reader.GetInt32(0);
+                        gebruiker = CreateUserFromReader(reader);
                     }
                 }
             }
-            return gebruikerID;
-        }
-
-        public int BeheerderOphalen(int gebruikerID)
-        {
-            bool beheerder = false;
-            int beheerderReturn = 0;
-            if(gebruikerID >= 1)
-            {
-                using (SqlConnection conn = Database.Connection)
-                {
-                    string query = "Select Beheerder From Gebruiker where GebruikerID = @GebruikerID";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@GebruikerID", gebruikerID);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            beheerder = reader.GetBoolean(0);
-                        }
-                    }
-                    if (beheerder == true)
-                    {
-                        beheerderReturn = 1;
-                    }
-                    else
-                    {
-                        beheerderReturn = 2;
-                    }
-                }
-                }
-            
-            if(gebruikerID == 0)
-            {
-                beheerderReturn = 3;
-            }
-            return beheerderReturn;
+            return gebruiker;
         }
 
         private Gebruiker CreateUserFromReader(SqlDataReader reader)
@@ -116,7 +71,7 @@ namespace KillerApp.Data
                 Convert.ToString(reader["EMail"]),
                 Convert.ToInt64(reader["Telefoon"]),
                 Convert.ToString(reader["Wachtwoord"]),
-                Convert.ToInt32(reader["Beheerder"])
+                Convert.ToString(reader["Gebruikerstype"])
                 );
         }
     }

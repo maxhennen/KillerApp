@@ -26,12 +26,23 @@ namespace KillerApp.Models
         public string Mail { get; private set; }
         public long Telefoonnummer { get; private set; }
         public string Wachtwoord { get; private set; }
-        public int Beheerder { get; private set; }
+        public string Gebruikerstype { get; private set; }
 
         public GebruikerRepository GebruikerRepo { get; private set; }
+
+        public Gebruiker()
+        {
+
+        }
+
+        public Gebruiker(string email, string wachtwoord)
+        {
+            Mail = email;
+            Wachtwoord = wachtwoord;
+        }
         public Gebruiker(int gebruikerID, string voornaam,string achternaam, DateTime geboortedatum,
             string straat, int huisnummer, string postcode, string woonplaats, string land, string mail
-            , long telefoonnummer, string wachtwoord, int beheerder)
+            , long telefoonnummer, string wachtwoord, string gebruikerstype)
         {
             GebruikerID = gebruikerID;
             Voornaam = voornaam;
@@ -45,7 +56,7 @@ namespace KillerApp.Models
             Mail = mail;
             Telefoonnummer = telefoonnummer;
             Wachtwoord = wachtwoord;
-            Beheerder = beheerder;
+            Gebruikerstype = gebruikerstype;
         }
 
         public Gebruiker(string voornaam, string achternaam, DateTime geboortedatum,
@@ -63,27 +74,17 @@ namespace KillerApp.Models
             Telefoonnummer = telefoonnummer;
             Wachtwoord = wachtwoord;
         }
-        public Gebruiker(string mail, string wachtwoord)
-        {
-            Mail = mail;
-            Wachtwoord = wachtwoord;
-        }
 
-        public int Login(string email, string wachtwoord)
+        public Gebruiker Login(Gebruiker gebruiker)
         {
             GebruikerRepo = new GebruikerRepository(new GebruikerSQLContext());
-            return GebruikerRepo.Login(email, wachtwoord);
+            return GebruikerRepo.Login(gebruiker);
         }
 
-        public int BeheerderOphalen(int gebruikerID)
-        {
-            return GebruikerRepo.BeheerderOphalen(gebruikerID);
-        }
-
-        public bool Registreren(Gebruiker gebruiker)
+        public void Registreren(Gebruiker gebruiker)
         {
             GebruikerRepo = new GebruikerRepository(new GebruikerSQLContext());
-            return GebruikerRepo.Registreren(gebruiker);
+            GebruikerRepo.Registreren(gebruiker);
         }
     }
 }

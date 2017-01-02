@@ -1,28 +1,9 @@
-﻿@Layout = "/Home/Master"
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Home</title>
-    <link href="~/Style/bootstrap.css" rel="stylesheet" />
-    <link href="~/Style/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Style/shop-homepage.css" rel="stylesheet" />
-    <script src="~/scripts/JavaScript.js"></script>
-    <script src="~/scripts/jquery.js"></script>
-    <script src="~/scripts/bootstrap.min.js"></script>
-    <script src="~/scripts/bootstrap.js"></script>
-</head>
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <body>
     <div class="Homepagina">
         <div class="row">
-            <div class="col-md-3">
-                <p class="lead">MobielKopen.nl</p>
-                <div class="list-group">
-                    <a href="/Home/Telefoons" class="list-group-item">Telefoons</a>
-                    <a href="#" class="list-group-item">Accessoires</a>
-                </div>
-            </div>
             <div class="col-md-9">
                 <div class="row carousel-holder">
                     <div class="col-md-12">
@@ -72,7 +53,8 @@
                         <p class="pull-right">15 reviews</p>
                     </div>
                 </div>
-                </div>
-                }
-    </body>
-</html>
+            </div>
+        }
+    </div>
+</body>
+

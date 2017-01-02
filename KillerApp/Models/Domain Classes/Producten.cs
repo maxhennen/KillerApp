@@ -1,5 +1,6 @@
 ﻿using KillerApp.Data;
 using KillerApp.Logic;
+using KillerApp.Models.Domain_Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +17,24 @@ namespace KillerApp.Models
         public string Merk { get; private set; }
         public string  Afbeeldingen { get; private set; }
         public int TelefoonID { get; private set; }
-
+        public int Aantal { get; private set; }
+        public int SpecificatieID { get; private set; }
+        public Producten Product { get; private set; }
+        private Specificatie Specificatie = new Specificatie();
         private ProductenRepository productenRepo;
+        private List<Producten> productenWinkelmand = new List<Producten>();
+
         public Producten()
         {
 
         }
 
+        public Producten(Producten product, Specificatie specificatie, int aantal)
+        {
+            Product = product;
+            Specificatie = specificatie;
+            Aantal = aantal;
+        }
         public Producten (int productId, string naam, decimal prijs, string merk, string afbeeldingen, int telefoonId)
         {
             ProductID = productId;

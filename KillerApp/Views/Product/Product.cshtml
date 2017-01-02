@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body>
+        <div>
+            <h1>@ViewBag.Product.Naam</h1>
+            <img src="@ViewBag.Product.Afbeeldingen" />
+            @foreach (var item in ViewBag.Specificaties)
+            {
+                <div class="row">
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <p>Kleur: @item.Kleur</p> <br />
+                            <p>Geheugen: @item.Geheugen</p> <br />
+                            <p>Bluetooth: @item.Bluetooth</p> <br />
+                            <p>WiFi: @item.WiFi </p><br />
+                            <p>3G: @item.DrieG </p><br />
+                            <p>4G; @item.VierG </p><br />
+                            <p>Amphere: @item.Amphere </p><br />
+                            <p>Draadloos: @item.Draadloos </p><br />
+                            <p>Prijs: @item.Prijs</p><br />
+                        </div>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <form method="post" id="aantal" class="navbar-form navbar-right" role="form" action="/Product/Toevoegen">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <label>Aantal:</label>
+                                </li>
+                                <li>
+                                    <div class="input-group">
+                                        <select name="AantalProduct">
+                                            @foreach (int aantal in ViewBag.Aantal)
+                                            {
+                                                <option>
+                                                    @aantal
+                                                </option>
+                                            }
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Toevoegen","Product",new { productID = ViewBag.Product.ProductID, specificatieID = @item.SpecificatieID})">Bestellen</a>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+</body>

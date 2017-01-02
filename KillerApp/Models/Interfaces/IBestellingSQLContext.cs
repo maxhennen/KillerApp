@@ -9,6 +9,6 @@ namespace KillerApp.Interfaces
 {
     public interface IBestellingSQLContext
     {
-        Bestelling Invoeren(List<Producten> producten, Gebruiker email);
+        void Bestelling(List<Bestelling> producten);
     }
 }

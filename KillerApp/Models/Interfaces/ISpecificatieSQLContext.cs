@@ -10,5 +10,6 @@ namespace KillerApp.Models.Interfaces
     public interface ISpecificatieSQLContext
     {
         List<Specificatie> SpecificatieBijProduct(int productID);
+        Specificatie SpecificatieBijID(int specificatieID);
     }
 }

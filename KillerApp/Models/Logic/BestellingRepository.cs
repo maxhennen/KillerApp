@@ -17,9 +17,6 @@ namespace KillerApp.Logic
             Context = context;
         }
 
-        public Bestelling Invoeren(List<Producten> producten, Gebruiker email)
-        {
-            return Context.Invoeren(producten,email);
-        }
+       
     }
 }

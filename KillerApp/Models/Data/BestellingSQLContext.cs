@@ -10,23 +10,32 @@ using System.Data;
 
 namespace KillerApp.Data
 {
-    class BestellingSQLContext:IBestellingSQLContext
+    class BestellingSQLContext : IBestellingSQLContext
     {
-       public Bestelling Invoeren(List<Producten> producten, Gebruiker email)
+        public void Bestelling(List<Bestelling> bestelling)
         {
-            Bestelling bestelling = new Bestelling();
-            using(SqlConnection conn = Database.Connection)
+            using (SqlConnection conn = Database.Connection)
             {
-                using(SqlCommand cmd = new SqlCommand("BestellingInvoeren", conn))
+                string[] query = new string[1];
+                query[0] = "INSERT INTO Bestelling(KlantID,DatumTijd)"
+                    + "Values(@KlantID,@DatumTijd)";
+                query[1] = "INSERT INTO Bestelregel(Producten_ProductID,@Specificaties_SpecificatieID)"
+                    + "Values(@ProductID,@SpecificatieID)";
+                for (int i = 0; i < query.Length; i++)
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = email.Mail;
-                    cmd.Parameters.Add("@List", SqlDbType.VarChar).Value = producten;
-                    conn.Open();
-                    cmd.ExecuteNonQuery();  
-                } 
+                    using (SqlCommand cmd = new SqlCommand(query[i], conn))
+                    {
+                        cmd.Parameters.AddWithValue("@KlantID",0);
+                        cmd.Parameters.AddWithValue("@DatumTijd", DateTime.Now);
+                        foreach (Bestelling b in bestelling)
+                        {
+                            cmd.Parameters.AddWithValue("@ProductID", b.ProductID);
+                            cmd.Parameters.AddWithValue("@SpecificatieID", b.SpecificatieID);
+                        }
+                        cmd.ExecuteNonQuery();
+                    }
+                }
             }
-            return bestelling;
         }
     }
 }

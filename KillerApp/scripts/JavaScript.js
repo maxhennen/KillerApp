@@ -5,3 +5,7 @@
 function RegistratieAlert(Bericht){
     window.alert(Bericht);
 }
+
+function VorigePagina() {
+    window.history.back()
+}

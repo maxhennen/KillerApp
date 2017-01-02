@@ -15,7 +15,7 @@ namespace KillerApp.Models.Data
             List<Specificatie> specificaties = new List<Specificatie>();
             using(SqlConnection conn = Database.Connection)
             {
-                string query = "SELECT s.*, p.Naam FROM Specificaties s JOIN ProductSpecificatiesVoorraad ps ON ps.Specificaties_SpecificatieID = s.SpecificatieID JOIN Producten p ON p.ProductID = ps.Producten_ProductID WHERE p.ProductID = @ProductID";
+                string query = "SELECT s.* FROM Specificaties s JOIN ProductSpecificatiesVoorraad ps ON ps.Specificaties_SpecificatieID = s.SpecificatieID JOIN Producten p ON p.ProductID = ps.Producten_ProductID WHERE p.ProductID = @ProductID";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@ProductID", productID);
                 using(SqlDataReader reader = cmd.ExecuteReader())
@@ -28,10 +28,29 @@ namespace KillerApp.Models.Data
             }
             return specificaties;
         }
+
+        public Specificatie SpecificatieBijID(int specificatieID)
+        {
+            Specificatie specificatie = null;
+            using (SqlConnection conn = Database.Connection)
+            {
+                string query = "SELECT * FROM Specificaties WHERE SpecificatieID = @SpecificatieID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@SpecificatieID", specificatieID);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        specificatie = CreateSpecificatieFromReader(reader);
+                    }
+                }
+            }
+            return specificatie;
+        }
         private Specificatie CreateSpecificatieFromReader(SqlDataReader reader)
         {
             return new Specificatie(
-            Convert.ToString(reader["Naam"]),
+            Convert.ToInt32(reader["SpecificatieID"]),
             Convert.ToString(reader["Kleur"]),
             Convert.ToBoolean(reader["Bluetooth"]),
             Convert.ToInt32(reader["Geheugen"]),

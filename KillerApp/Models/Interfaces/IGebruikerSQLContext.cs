@@ -9,8 +9,7 @@ namespace KillerApp.Interfaces
 {
     public interface IGebruikerSQLContext
     {
-        int Login(string email, string wachtwoord);
-        int BeheerderOphalen(int gebruikerID);
-        bool Registreren(Gebruiker gebruiker);
+        Gebruiker Login(Gebruiker gebruiker);
+        void Registreren(Gebruiker gebruiker);
     }
 }

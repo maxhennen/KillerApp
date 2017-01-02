@@ -20,5 +20,10 @@ namespace KillerApp.Models.Logic
         {
             return Context.SpecificatieBijProduct(productID);
         }
+
+        public Specificatie SpecificatieBijID(int specificatieID)
+        {
+            return Context.SpecificatieBijID(specificatieID);
+        }
     }
 }

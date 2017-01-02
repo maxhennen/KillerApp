@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>MobielKopen.nl</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Style/bootstrap.css" rel="stylesheet" />
+    <link href="~/Style/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Style/shop-homepage.css" rel="stylesheet" />
+    <script src="~/scripts/JavaScript.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+                @if (this.Session["Header"] == null)
+                {
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="@Url.Action("Homepage","Home")">MobielKopen.nl</a>
+                            </div>
+
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="collapse" role="button" aria-haspopup="true" aria-expanded="false">Producten <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="@Url.Action("Telefoons","Telefoons")">Telefoons</a></li>
+                                            <li><a href="#">Accessoires</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["Producten"]</a></li>
+                                </ul>
+                                <form method="post" id="login" class="navbar-form navbar-right" role="form" action="/Home/Login">
+                                    <div class="input-group">
+                                        <input id="email" type="email" class="form-control" name="EmailText" value="" placeholder="Email Address">
+                                    </div>
+                                    <div class="input-group">
+                                        <input id="password" type="password" class="form-control" name="WachtwoordText" value="" placeholder="Password">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                </form>
+                                <form method="post" id="registreren" class="navbar-form navbar-right" role="form" action="/Registratie/Index">
+                                    <button type="submit" class="btn btn-primary">Registreren</button>
+                                </form>
+                            </div>
+                        </div>
+                    </nav>
+                }
+
+                else if ((string)this.Session["Header"] == "Beheerder")
+                {
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="@Url.Action("Homepage","Home")">MobielKopen.nl</a>
+                            </div>
+
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="collapse" role="button" aria-haspopup="true" aria-expanded="false">Producten <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="@Url.Action("Telefoons","Telefoons")">Telefoons</a></li>
+                                            <li><a href="#">Accessoires</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Mijn account</a></li>
+                                    <li><a href="#">Beheer</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                                <form method="post" id="loguit" class="navbar-form navbar-right" role="form" action="/Home/Loguit">
+                                    <a href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["Producten"]</a>
+                                    <p class="navbar-text">Welkom @Session["Gebruiker"]</p>
+                                    <button type="submit" class="btn btn-primary">Loguit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </nav>
+                }
+
+                else if ((string)this.Session["Header"] == "Klant")
+                {
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="@Url.Action("Homepage","Home")">MobielKopen.nl</a>
+                            </div>
+
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="collapse" role="button" aria-haspopup="true" aria-expanded="false">Producten <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="@Url.Action("Telefoons","Telefoons")">Telefoons</a></li>
+                                            <li><a href="#">Accessoires</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Mijn account</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                                <form method="post" id="loguit" class="navbar-form navbar-right" role="form" action="/Home/Loguit">
+                                    <a class="navbar-text" href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["ProductenAantal"]</a>
+                                    <p class="navbar-text">Welkom @Session["Gebruiker"]</p>
+                                    <button type="submit" class="btn btn-primary">Loguit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </nav>
+                }
+
+        @if (Request.UrlReferrer != null)
+                {
+            <div class="text-right" >
+                <a href='javascript:history.go(-1)'>Terug</a>
+            </div>
+        }
+        </header>
+    
+                <!-- /.navbar-collapse -->
+            <!-- /.container -->
+
+    <!-- /.container -->
+        @RenderBody()
+    <!-- /.container -->
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Max Hennen @DateTime.Now.Year</p>
+                </div>
+            </div>
+        </footer>
+    <!-- jQuery -->
+    <script src="~/scripts/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script src="~/scripts/bootstrap.js"></script>
+</body>
+</html>

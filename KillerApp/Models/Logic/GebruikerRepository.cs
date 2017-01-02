@@ -17,19 +17,14 @@ namespace KillerApp.Logic
             Context = context;
         }
 
-        public int Login(string email, string wachtwoord)
+        public Gebruiker Login(Gebruiker gebruiker)
         {
-            return Context.Login(email, wachtwoord);
+            return Context.Login(gebruiker);
         }
 
-        public int BeheerderOphalen(int gebruikerID)
+        public void Registreren(Gebruiker gebruiker)
         {
-            return Context.BeheerderOphalen(gebruikerID);
-        }
-
-        public bool Registreren(Gebruiker gebruiker)
-        {
-            return Context.Registreren(gebruiker);
+            Context.Registreren(gebruiker);
         }
     }
 }
