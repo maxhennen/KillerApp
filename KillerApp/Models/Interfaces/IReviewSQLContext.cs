@@ -10,6 +10,6 @@ namespace KillerApp.Interfaces
     interface IReviewSQLContext
     {
         Review Invoeren(Review review);
-        List<Review> GetReview();
+        List<Review> ReviewBijProduct(int productID);
     }
 }

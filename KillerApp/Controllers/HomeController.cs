@@ -15,7 +15,7 @@ namespace KillerApp.Controllers
         {
             Producten producten = new Producten();
             ViewBag.Telefoons = producten.ProductenHomepage();
-            Session["Producten"] = 0;
+            Session["ProductenAantal"] = 0;
             return View();
         }
 

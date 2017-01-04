@@ -20,20 +20,20 @@ namespace KillerApp.Models
         public int Aantal { get; private set; }
         public int SpecificatieID { get; private set; }
         public Producten Product { get; private set; }
-        private Specificatie Specificatie = new Specificatie();
+        public Specificatie Specificatie { get; private set; }
         private ProductenRepository productenRepo;
-        private List<Producten> productenWinkelmand = new List<Producten>();
 
         public Producten()
         {
 
         }
 
-        public Producten(Producten product, Specificatie specificatie, int aantal)
+
+        public Producten(Producten product, Specificatie specificatie)
         {
+            Specificatie = new Specificatie();
             Product = product;
             Specificatie = specificatie;
-            Aantal = aantal;
         }
         public Producten (int productId, string naam, decimal prijs, string merk, string afbeeldingen, int telefoonId)
         {

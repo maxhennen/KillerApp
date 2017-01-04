@@ -22,9 +22,9 @@ namespace KillerApp.Logic
             return Context.Invoeren(review);
         }
 
-        public List<Review> GetAllReviews()
+        public List<Review> ReviewBijProduct(int productID)
         {
-            return Context.GetReview();
+            return Context.ReviewBijProduct(productID);
         }
     }
 }

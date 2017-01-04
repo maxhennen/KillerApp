@@ -10,28 +10,40 @@ namespace KillerApp.Controllers
 {
     public class ProductController : Controller
     {
-        private Bestelling bestelling = new Bestelling();
-        private Producten product = new Producten();
-        private Specificatie spec = new Specificatie();
+        private Producten Producten = new Producten();
+        private Specificatie Specificatie = new Specificatie();
+        private Review review = new Review();
+        public List<Producten> ListWinkelmand { get; private set; }
         // GET: Product
         public ActionResult Product(int ProductID)
         {
+            ViewBag.Review = review.ReviewBijProduct(ProductID);
             List<int> getallen = new List<int>();
             for (int i = 1; i <= 10; i++)
             {
                 getallen.Add(i);
             }
             ViewBag.Aantal = getallen;
-            ViewBag.Product = product.ProductBijID(ProductID);
-            ViewBag.Specificaties = spec.SpecificatieBijProduct(ProductID);
+            ViewBag.Product = Producten.ProductBijID(ProductID);
+            ViewBag.Specificaties = Specificatie.SpecificatieBijProduct(ProductID);
             return View();
         }
 
-        public ActionResult Toevoegen(int productID, int specificatieID, string AantalProduct)
+        public ActionResult Toevoegen(int productID, int specificatieID)
         {
-            Session["Producten"] = bestelling.ProductenWinkelmand(productID, specificatieID, Convert.ToInt32(AantalProduct));
-            Session["ProductenAantal"] = bestelling.ProductenWinkelmand(productID, specificatieID, Convert.ToInt32(AantalProduct)).Count;
+            if(Session["Bestelling"] == null)
+            {
+                Session["Bestelling"] = new Bestelling();
+            }
+
+            Bestelling bestelling = (Bestelling)Session["Bestelling"];
+            Producten product = new Producten(Producten.ProductBijID(productID), Specificatie.SpecificatieBijID(specificatieID));
+            bestelling.ProductenWinkelmand.Add(product);
+            Session["Bestelling"] = bestelling;
+            Session["ProductenAantal"] = bestelling.ProductenWinkelmand.Count;
+            Session["ListProducten"] = bestelling.ProductenWinkelmand;
             return RedirectToAction("Product", "Product", new { ProductID = productID});
         }
+
     }
 }

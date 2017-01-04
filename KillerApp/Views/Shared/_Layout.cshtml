@@ -11,7 +11,9 @@
     <link href="~/Style/bootstrap.css" rel="stylesheet" />
     <link href="~/Style/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Style/shop-homepage.css" rel="stylesheet" />
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="~/scripts/JavaScript.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -50,7 +52,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="#">Contact</a></li>
-                                    <li><a href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["Producten"]</a></li>
+                                    <li><a href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["ProductenAantal"]</a></li>
                                 </ul>
                                 <form method="post" id="login" class="navbar-form navbar-right" role="form" action="/Home/Login">
                                     <div class="input-group">
@@ -97,9 +99,9 @@
                                     <li><a href="#">Mijn account</a></li>
                                     <li><a href="#">Beheer</a></li>
                                     <li><a href="#">Contact</a></li>
+                                    <li><a href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["ProductenAantal"]</a></li>
                                 </ul>
                                 <form method="post" id="loguit" class="navbar-form navbar-right" role="form" action="/Home/Loguit">
-                                    <a href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["Producten"]</a>
                                     <p class="navbar-text">Welkom @Session["Gebruiker"]</p>
                                     <button type="submit" class="btn btn-primary">Loguit</button>
                                 </form>
@@ -135,9 +137,9 @@
                                     </li>
                                     <li><a href="#">Mijn account</a></li>
                                     <li><a href="#">Contact</a></li>
+                                    <li><a class="navbar-text" href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["ProductenAantal"]</a></li>
                                 </ul>
                                 <form method="post" id="loguit" class="navbar-form navbar-right" role="form" action="/Home/Loguit">
-                                    <a class="navbar-text" href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["ProductenAantal"]</a>
                                     <p class="navbar-text">Welkom @Session["Gebruiker"]</p>
                                     <button type="submit" class="btn btn-primary">Loguit</button>
                                 </form>
