@@ -1,11 +1,3 @@
-﻿function GegevensNietBekend() {
-    window.alert("Email en wachtwoord komen niet overeen.");
-}
-
-function RegistratieAlert(Bericht){
-    window.alert(Bericht);
-}
-
-function VorigePagina() {
-    window.history.back()
-}
+﻿$(document).ready(function () {
+    $('.dropdown-toggle').dropdown();
+});

@@ -13,6 +13,7 @@ namespace KillerApp.Models
         public int ReviewID { get; private set; }
         public int AantalSterren { get; private set; }
         public string ReviewTekst { get; private set; }
+        public int KlantID { get; private set; }
         public string KlantNaam { get; private set; }
         public int ProductID { get; private set; }
         public int GemiddeldeScore { get; private set; }
@@ -36,10 +37,24 @@ namespace KillerApp.Models
             VerschilDagen = verschilDagen;
         }
 
-        public List<Review> ReviewBijProduct(int productID)
+        public Review(int aantalSterren,string reviewTekst,int klantID, int productID)
+        {
+            AantalSterren = aantalSterren;
+            ReviewTekst = reviewTekst;
+            KlantID = klantID;
+            ProductID = productID; 
+        }
+
+        public List<Review> ReviewBijProduct(string productNaam)
         {
             ReviewRepo = new ReviewRepository(new ReviewSQLContext());
-            return ReviewRepo.ReviewBijProduct(productID);
+            return ReviewRepo.ReviewBijProduct(productNaam);
+        }
+
+        public void ReviewPlaatsen(Review review)
+        {
+            ReviewRepo = new ReviewRepository(new ReviewSQLContext());
+            ReviewRepo.ReviewPlaatsen(review);
         }
     }
 }

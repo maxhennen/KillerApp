@@ -16,13 +16,13 @@ namespace KillerApp.Controllers
             return View();
         }
 
-        public ActionResult Registreren(string Voornaam, string Achternaam, string Email, string Wachtwoord, DateTime Geboortedatum,
-            string Straat, int Huisnummer, string Woonplaats, string Postcode, long Telefoonnummer)
+        public ActionResult RegistrerenKlant(string Voornaam, string Achternaam, string Email, string Wachtwoord, DateTime Geboortedatum,
+            string Straat, int Huisnummer, string Woonplaats, string Postcode, long Telefoonnummer,string gebruikerstype)
         {
                 Gebruiker gebruiker = new Gebruiker(Voornaam, Achternaam, Geboortedatum, Straat, Huisnummer, Postcode,
-                Woonplaats, Email, Telefoonnummer, Wachtwoord);
+                Woonplaats, Email, Telefoonnummer, Wachtwoord,"Klant");
                 gebruiker.Registreren(gebruiker);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Homepage", "Home");
         }
     }
 }

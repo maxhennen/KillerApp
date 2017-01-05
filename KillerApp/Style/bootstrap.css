@@ -6756,4 +6756,8 @@ button.close {
     display: none !important;
   }
 }
+
+.status-upload ul li{
+    display: inline;
+}
 /*# sourceMappingURL=bootstrap.css.map */

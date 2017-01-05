@@ -2,42 +2,95 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="rating-block">
-                    <h4>Average user rating</h4>
-                    @foreach (var gemiddeld in ViewBag.Review)
-                    {
-                        @gemiddeld.GemiddeldeScore = (@gemiddeld.GemiddeldeScore + @gemiddeld.GemiddeldeScore) / @ViewBag.Review.Count
-                    <h2 class="bold padding-bottom-7"> @gemiddeld.GemiddeldeScore<small>/ 5</small></h2>
-                    }
-                </div>
-            </div>
-            @foreach (var item in ViewBag.Review)
-            {
-            <div class="row">
-                <div class="col-sm-7">
-                    <hr />
-                    <div class="review-block">
-                        <hr />
-                        <hr />
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="review-block-name"><p>@item.KlantNaam</p></div>
-                                <div class="review-block-date">@item.DatumTijd<br />@item.VerschilDagen day ago</div>
-                            </div>
-                            <div class="col-sm-9">
-                                <div class="review-block-rate">
-                                    <h5 class="bold padding-bottom-7">@item.AantalSterren<small>/5</small></h5>
-                                </div>
-                                <div class="review-block-description">@item.ReviewTekst</div>
+    @foreach (var item in ViewBag.Product)
+    {
+        <form method="post" role="form">
+            <div class="container">
+                <div class="row" style="margin-top:20px">
+                    <div class="col-sm-10">
+                        <img class="img-responsive" src="@item.Afbeeldingen" alt="">
+                        <h4>@item.Naam</h4>
+                        <span>Kleur: @item.Kleur</span><br />
+                        <span>Bluetooth: @item.Bluetooth</span><br />
+                        <span>Geheugen: @item.Geheugen</span><br />
+                        <span>WiFi: @item.WiFi</span><br />
+                        <span>3G: @item.DrieG</span><br />
+                        <span>4G: @item.VierG</span><br />
+                        <span>Draadloos: @item.Draadloos</span><br />
+                        <div class="wrapper">
+                            <div class="post-meta">
+                                <small><a href="@Url.Action("Toevoegen","Product",new {productNaam = @item.Naam, specificatieID = @item.SpecificatieID})">Bestellen</a></small>
+                                <div class="price">Euro: @item.Prijs</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            }
-        </div>
-        </div>
-</body>
+        </form>
+    }
+@using (Html.BeginForm("ReviewPlaatsen", "Product"))
+{
+                <div class="container">
+                    <div class="row">
+                        <h3>Review schrijven</h3>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="widget-area no-padding blank">
+                                @if (Session["Gebruiker"] != null)
+                                {
+                                    <form method="post" id="login" class="review-block" role="form" action="@Url.Action("ReviewPlaatsen","Product")">
+                                        <div class="status-upload">
+                                            <input type="text" placeholder="Review schrijven" name="ReviewTekst" /> <br />
+
+                                            @Html.RadioButton("score", 1, new { id = "1" }) 1
+                                            @Html.RadioButton("score", 2, new { id = "2" }) 2
+                                            @Html.RadioButton("score", 3, new { id = "3" }) 3
+                                            @Html.RadioButton("score", 4, new { id = "4" }) 4
+                                            @Html.RadioButton("score", 5, new { id = "5" }) 5
+                                            <button type="submit" class="btn btn-primary">Plaats</button>
+                                        </div>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <p>U kunt alleen een review schrijven als u ingelogd bent.</p>
+                                }
+                            </div><!-- Status Upload  -->
+                        </div><!-- Widget Area -->
+                    </div>
+
+                </div>
+}
+                <div class="container">
+                    <div class="row">
+                        <br />
+                        @foreach (var item in ViewBag.Review)
+                        {
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <hr />
+                                    <div class="review-block">
+                                        <hr />
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <div class="review-block-name"><p>@item.KlantNaam</p></div>
+                                                <div class="review-block-date">@item.DatumTijd<br />@item.VerschilDagen dagen geleden</div>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="review-block-rate">
+                                                    <h5 class="bold padding-bottom-7">@item.AantalSterren<small>/5</small></h5>
+                                                </div>
+                                                <div class="review-block-description">@item.ReviewTekst</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+    </body>

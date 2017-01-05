@@ -9,8 +9,10 @@ namespace KillerApp.Interfaces
 {
     public interface IProductenSQLContext
     {
+        void ProductToevoegen(Producten product);
         List<Producten> AlleTelefoons();
+        List<Producten> AlleAccessoires();
         List<Producten> ProductenHomepage();
-        Producten ProductBijID(int productID);
+        List<Producten> ProductBijNaam(string productNaam);
     }
 }

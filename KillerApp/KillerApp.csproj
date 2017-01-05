@@ -76,6 +76,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -138,10 +139,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\MijnBestellingenController.cs" />
+    <Compile Include="Controllers\BeheerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RegistratieController.cs" />
-    <Compile Include="Controllers\TelefoonsController.cs" />
+    <Compile Include="Controllers\ProductenController.cs" />
     <Compile Include="Controllers\WinkelmandController.cs" />
     <Compile Include="Models\Data\ProductenSQLContext.cs" />
     <Compile Include="Models\Data\BestellingSQLContext.cs" />
@@ -151,13 +154,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Data\Database.cs" />
-    <Compile Include="Models\Data\SpecificatieSQLContext.cs" />
-    <Compile Include="Models\Domain Classes\Specificatie.cs" />
     <Compile Include="Models\Interfaces\IProductenSQLContext.cs" />
     <Compile Include="Models\Interfaces\IBestellingSQLContext.cs" />
     <Compile Include="Models\Interfaces\IGebruikerSQLContext.cs" />
     <Compile Include="Models\Interfaces\IReviewSQLContext.cs" />
-    <Compile Include="Models\Interfaces\ISpecificatieSQLContext.cs" />
     <Compile Include="Models\Logic\ProductenRepository.cs" />
     <Compile Include="Models\Logic\BestellingRepository.cs" />
     <Compile Include="Models\Logic\GebruikerRepository.cs" />
@@ -166,7 +166,6 @@
     <Compile Include="Models\Domain Classes\Gebruiker.cs" />
     <Compile Include="Models\Domain Classes\Producten.cs" />
     <Compile Include="Models\Domain Classes\Review.cs" />
-    <Compile Include="Models\Logic\SpecificatieRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -175,7 +174,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Telefoons\Telefoons.cshtml" />
+    <Content Include="Views\Producten\Telefoons.cshtml" />
     <Content Include="Views\Registratie\Registratie.cshtml" />
     <Content Include="Views\Product\Product.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -183,6 +182,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Homepage.cshtml" />
     <Content Include="Views\Winkelmand\Winkelmand.cshtml" />
+    <Content Include="Views\Beheer\BeheerderToevoegen.cshtml" />
+    <Content Include="Views\Beheer\ToevoegenProduct.cshtml" />
+    <Content Include="Views\Producten\Accessoires.cshtml" />
+    <Content Include="Views\MijnBestellingen\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -193,6 +196,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
+    <Folder Include="Views\Account\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -8,7 +8,7 @@ using KillerApp.Models;
 
 namespace KillerApp.Logic
 {
-    class BestellingRepository
+    public class BestellingRepository
     {
         private IBestellingSQLContext Context;
 
@@ -17,6 +17,12 @@ namespace KillerApp.Logic
             Context = context;
         }
 
-       
+        public List<Bestelling> BestellingenGebruiker(int gebruikerID)
+        {
+            return Context.BestellingenGebruiker(gebruikerID);
+        }
+
+
+
     }
 }

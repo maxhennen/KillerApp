@@ -8,11 +8,11 @@
     <meta name="author" content="">
     <title>MobielKopen.nl</title>
     <!-- Bootstrap Core CSS -->
+    <script src="~/scripts/JavaScript.js"></script>
     <link href="~/Style/bootstrap.css" rel="stylesheet" />
     <link href="~/Style/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Style/shop-homepage.css" rel="stylesheet" />
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="~/scripts/JavaScript.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -45,10 +45,10 @@
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="collapse" role="button" aria-haspopup="true" aria-expanded="false">Producten <span class="caret"></span></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Producten <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="@Url.Action("Telefoons","Telefoons")">Telefoons</a></li>
-                                            <li><a href="#">Accessoires</a></li>
+                                            <li><a href="/Producten/Telefoons">Telefoons</a></li>
+                                            <li><a href="/Producten/Accessoires">Accessoires</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="#">Contact</a></li>
@@ -63,7 +63,7 @@
                                     </div>
                                     <button type="submit" class="btn btn-primary">Login</button>
                                 </form>
-                                <form method="post" id="registreren" class="navbar-form navbar-right" role="form" action="/Registratie/Index">
+                                <form method="post" id="registreren" class="navbar-form navbar-right" role="form" action="/Registratie/Registratie">
                                     <button type="submit" class="btn btn-primary">Registreren</button>
                                 </form>
                             </div>
@@ -73,7 +73,7 @@
 
                 else if ((string)this.Session["Header"] == "Beheerder")
                 {
-                    <nav class="navbar navbar-default">
+                    <nav class="navbar navbar-default" role="navigation">
                         <div class="container-fluid">
                             <!-- Brand and toggle get grouped for better mobile display -->
                             <div class="navbar-header">
@@ -90,19 +90,25 @@
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="collapse" role="button" aria-haspopup="true" aria-expanded="false">Producten <span class="caret"></span></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Beheer <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="@Url.Action("Telefoons","Telefoons")">Telefoons</a></li>
-                                            <li><a href="#">Accessoires</a></li>
+                                            <li><a href="/Beheer/BeheerderToevoegen">Beheerder aanmaken</a></li>
+                                            <li><a href="/Beheer/ToevoegenProduct">Telefoon toevoegen</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Mijn account</a></li>
-                                    <li><a href="#">Beheer</a></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Producten <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/Producten/Telefoons">Telefoons</a></li>
+                                            <li><a href="/Producten/Accessoires">Accessoires</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="/MijnBestellingen/Index">Mijn Bestellingen</a></li>
                                     <li><a href="#">Contact</a></li>
                                     <li><a href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["ProductenAantal"]</a></li>
+                                    <li><p class="navbar-text">Welkom @Session["Gebruiker"]</p></li>
                                 </ul>
                                 <form method="post" id="loguit" class="navbar-form navbar-right" role="form" action="/Home/Loguit">
-                                    <p class="navbar-text">Welkom @Session["Gebruiker"]</p>
                                     <button type="submit" class="btn btn-primary">Loguit</button>
                                 </form>
                             </div>
@@ -129,18 +135,18 @@
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="collapse" role="button" aria-haspopup="true" aria-expanded="false">Producten <span class="caret"></span></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Producten <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="@Url.Action("Telefoons","Telefoons")">Telefoons</a></li>
-                                            <li><a href="#">Accessoires</a></li>
+                                            <li><a href="/Producten/Telefoons">Telefoons</a></li>
+                                            <li><a href="/Producten/Accessoires">Accessoires</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Mijn account</a></li>
+                                    <li><a href="/MijnBestellingen/Index">Mijn Bestellingen</a></li>
                                     <li><a href="#">Contact</a></li>
-                                    <li><a class="navbar-text" href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["ProductenAantal"]</a></li>
+                                    <li><a href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["ProductenAantal"]</a></li>
+                                    <li><p class="navbar-text">Welkom @Session["Gebruiker"]</p></li>
                                 </ul>
                                 <form method="post" id="loguit" class="navbar-form navbar-right" role="form" action="/Home/Loguit">
-                                    <p class="navbar-text">Welkom @Session["Gebruiker"]</p>
                                     <button type="submit" class="btn btn-primary">Loguit</button>
                                 </form>
                             </div>
@@ -173,7 +179,9 @@
     <!-- jQuery -->
     <script src="~/scripts/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="~/scripts/bootstrap.min.js"></script>
     <script src="~/scripts/bootstrap.js"></script>
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>

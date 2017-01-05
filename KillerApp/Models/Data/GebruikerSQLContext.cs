@@ -16,8 +16,8 @@ namespace KillerApp.Data
         {
                 using (SqlConnection conn = Database.Connection)
                 {
-                    string query = "INSERT INTO Gebruiker(GebruikerID,Voornaam,Achternaam,Geboortedatum,Straat,Huisnummer,Postcode,Woonplaats,Email,Telefoon,Wachtwoord,Gebruikerstype)"
-                        + "Values((Select (Max(GebruikerID)+1) FROM Gebruiker),@Voornaam,@Achternaam,@Geboortedatum,@Straat,@Huisnummer,@Postcode,@Woonplaats,@Email,@Telefoon,@Wachtwoord,@Gebruikerstype)";
+                    string query = "INSERT INTO Gebruiker(Voornaam,Achternaam,Geboortedatum,Straat,Huisnummer,Postcode,Woonplaats,Email,Telefoon,Wachtwoord,Gebruikerstype)"
+                        + "Values(@Voornaam,@Achternaam,@Geboortedatum,@Straat,@Huisnummer,@Postcode,@Woonplaats,@Email,@Telefoon,@Wachtwoord,@Gebruikerstype)";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@Voornaam", gebruiker.Voornaam);
@@ -30,7 +30,7 @@ namespace KillerApp.Data
                         cmd.Parameters.AddWithValue("@Email", gebruiker.Mail);
                         cmd.Parameters.AddWithValue("@Telefoon", gebruiker.Telefoonnummer);
                         cmd.Parameters.AddWithValue("@Wachtwoord", gebruiker.Wachtwoord);
-                        cmd.Parameters.AddWithValue("@Gebruikerstype", "Klant");
+                        cmd.Parameters.AddWithValue("@Gebruikerstype", gebruiker.Gebruikerstype);
 
                         cmd.ExecuteNonQuery();
                     }
@@ -56,7 +56,7 @@ namespace KillerApp.Data
             return gebruiker;
         }
 
-        private Gebruiker CreateUserFromReader(SqlDataReader reader)
+        public Gebruiker CreateUserFromReader(SqlDataReader reader)
         {
             return new Gebruiker(
                 Convert.ToInt32(reader["GebruikerID"]),

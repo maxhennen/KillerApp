@@ -22,14 +22,24 @@ namespace KillerApp.Logic
             return Context.AlleTelefoons();
         }
 
+        public List<Producten> AlleAccessoires()
+        {
+            return Context.AlleAccessoires();
+        }
+
         public List<Producten> ProductenHomepage()
         {
             return Context.ProductenHomepage();
         }
 
-        public Producten ProductBijID(int productID)
+        public List<Producten> ProductBijNaam(string productNaam)
         {
-            return Context.ProductBijID(productID);
+            return Context.ProductBijNaam(productNaam);
+        }
+
+        public void ProductToevoegen(Producten product)
+        {
+            Context.ProductToevoegen(product);
         }
     }
 }

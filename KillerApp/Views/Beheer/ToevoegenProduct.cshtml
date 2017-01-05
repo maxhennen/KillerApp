@@ -1,0 +1,138 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Toevoegen", "Beheer",FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<form class="form-horizontal" role="form" action="/Beheer/Toevoegen">
+    <fieldset>
+        <!-- Form Name -->
+        <legend>Product Toevoegen</legend>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="product_name">Product Naam</label>
+            <div class="col-md-4">
+                <input id="product_name" name="naam" placeholder="Product Naam" class="form-control input-md" required="" type="text">
+
+            </div>
+        </div>
+        <!-- Select Basic -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="product_categorie">Product Categorie</label>
+            <div class="col-md-4">
+                <select id="product_categorie" name="categorie" class="form-control">
+                    <option>Telefoon</option>
+                    <option>Accessoire</option>
+                </select>
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="available_quantity">Aantal Beschikbaar</label>
+            <div class="col-md-4">
+                <input id="available_quantity" name="aantal" placeholder="Aantal Beschikbaar" class="form-control input-md" required="" type="number">
+
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="product_weight">Merk</label>
+            <div class="col-md-4">
+                <input id="product_weight" name="merk" placeholder="Merk" class="form-control input-md" required="" type="text">
+
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="percentage_discount">Opvolger van</label>
+            <div class="col-md-4">
+                <select id="product_categorie" name="opvolger" class="form-control">
+                    <option></option>
+                    @foreach (var item in @ViewBag.AlleProducten)
+                    {
+                        <option>@item.Naam</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="stock_alert">Kleur</label>
+            <div class="col-md-4">
+                <input id="stock_alert" name="kleur" placeholder="Kleur" class="form-control input-md" required="" type="text">
+
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="stock_alert">Bluetooh</label>
+            <div class="col-md-4">
+                @Html.RadioButton("bluetooth", 1, new { id = "1" }) Ja
+                @Html.RadioButton("bluetooth", 0, new { id = "2" }) Nee
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="available_quantity">Geheugen</label>
+            <div class="col-md-4">
+                <input id="available_quantity" name="geheugen" placeholder="Geheugen" class="form-control input-md" required="" type="number">
+
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="stock_alert">WiFi</label>
+            <div class="col-md-4">
+                @Html.RadioButton("WiFi", 1, new { id = "1" }) Ja
+                @Html.RadioButton("WiFi", 0, new { id = "2" }) Nee
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="stock_alert">3G</label>
+            <div class="col-md-4">
+                @Html.RadioButton("DrieG", 1, new { id = "1" }) Ja
+                @Html.RadioButton("DrieG", 0, new { id = "2" }) Nee
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="stock_alert">4G</label>
+            <div class="col-md-4">
+                @Html.RadioButton("VierG", 1, new { id = "1" }) Ja
+                @Html.RadioButton("VierG", 0, new { id = "2" }) Nee
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="stock_alert">Draadloos</label>
+            <div class="col-md-4">
+                @Html.RadioButton("draadloos", 1, new { id = "1" }) Ja
+                @Html.RadioButton("draadloos", 0, new { id = "2" }) Nee
+            </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="available_quantity">Prijs</label>
+            <div class="col-md-4">
+                <input id="available_quantity" name="prijs" placeholder="Prijs" class="form-control input-md" required="" type="text">
+
+            </div>
+        </div>
+        <!-- File Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="filebutton">Afbeelding</label>
+            <div class="col-md-4">
+                <input id="filebutton" name="file" class="input-file" type="file">
+            </div>
+        </div>
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
+            <div class="col-md-4">
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+}

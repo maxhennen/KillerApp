@@ -61,7 +61,7 @@ namespace KillerApp.Models
 
         public Gebruiker(string voornaam, string achternaam, DateTime geboortedatum,
             string straat, int huisnummer, string postcode, string woonplaats, string mail
-            , long telefoonnummer, string wachtwoord)
+            , long telefoonnummer, string wachtwoord,string gebruikerstype)
         {
             Voornaam = voornaam;
             Achternaam = achternaam;
@@ -73,6 +73,7 @@ namespace KillerApp.Models
             Mail = mail;
             Telefoonnummer = telefoonnummer;
             Wachtwoord = wachtwoord;
+            Gebruikerstype = gebruikerstype;
         }
 
         public Gebruiker Login(Gebruiker gebruiker)

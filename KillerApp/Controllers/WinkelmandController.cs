@@ -1,5 +1,4 @@
 ﻿using KillerApp.Models;
-using KillerApp.Models.Domain_Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

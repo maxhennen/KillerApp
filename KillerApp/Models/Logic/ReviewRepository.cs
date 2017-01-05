@@ -17,14 +17,14 @@ namespace KillerApp.Logic
             Context = context;
         }
 
-        public Review Invoeren(Review review)
+        public void ReviewPlaatsen(Review review)
         {
-            return Context.Invoeren(review);
+            Context.ReviewPlaatsen(review);
         }
 
-        public List<Review> ReviewBijProduct(int productID)
+        public List<Review> ReviewBijProduct(string productNaam)
         {
-            return Context.ReviewBijProduct(productID);
+            return Context.ReviewBijProduct(productNaam);
         }
     }
 }

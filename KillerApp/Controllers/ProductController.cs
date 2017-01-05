@@ -1,5 +1,4 @@
 ﻿using KillerApp.Models;
-using KillerApp.Models.Domain_Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,39 +10,51 @@ namespace KillerApp.Controllers
     public class ProductController : Controller
     {
         private Producten Producten = new Producten();
-        private Specificatie Specificatie = new Specificatie();
         private Review review = new Review();
         public List<Producten> ListWinkelmand { get; private set; }
         // GET: Product
-        public ActionResult Product(int ProductID)
+        public ActionResult Product(string productNaam)
         {
-            ViewBag.Review = review.ReviewBijProduct(ProductID);
-            List<int> getallen = new List<int>();
-            for (int i = 1; i <= 10; i++)
-            {
-                getallen.Add(i);
-            }
-            ViewBag.Aantal = getallen;
-            ViewBag.Product = Producten.ProductBijID(ProductID);
-            ViewBag.Specificaties = Specificatie.SpecificatieBijProduct(ProductID);
+            ViewBag.Review = review.ReviewBijProduct(productNaam);
+            ViewBag.Product = ProductBijNaam(productNaam);
+            Session["ProductenWinkelmand"] = ProductBijNaam(productNaam);
             return View();
         }
 
-        public ActionResult Toevoegen(int productID, int specificatieID)
+        public ActionResult Toevoegen(string productNaam, int specificatieID)
         {
+            Producten ProductWinkelmand = null;
             if(Session["Bestelling"] == null)
             {
                 Session["Bestelling"] = new Bestelling();
             }
-
             Bestelling bestelling = (Bestelling)Session["Bestelling"];
-            Producten product = new Producten(Producten.ProductBijID(productID), Specificatie.SpecificatieBijID(specificatieID));
-            bestelling.ProductenWinkelmand.Add(product);
+
+            foreach(var item in (List<Producten>)Session["ProductenWinkelmand"])
+            {
+                if(item.SpecificatieID == specificatieID)
+                {
+                    ProductWinkelmand = new Producten();
+                }
+            }
+            bestelling.ProductenWinkelmand.Add(ProductWinkelmand);
             Session["Bestelling"] = bestelling;
             Session["ProductenAantal"] = bestelling.ProductenWinkelmand.Count;
             Session["ListProducten"] = bestelling.ProductenWinkelmand;
-            return RedirectToAction("Product", "Product", new { ProductID = productID});
+            return RedirectToAction("Product","Product",new { productNaam = productNaam });
         }
 
+        public ActionResult ReviewPlaatsen(string score, string ReviewTekst)
+        {
+            Review review = new Review(Convert.ToInt32(score),ReviewTekst,(int)Session["GebruikerID"],(int)Session["ProductID"]);
+            review.ReviewPlaatsen(review);
+            return RedirectToAction("Product", "Product", new { productID = (int)Session["ProductID"]});
+        }
+
+        public List<Producten> ProductBijNaam(string productNaam)
+        {
+            Producten product = new Producten();
+            return product.ProductBijNaam(productNaam);
+        }
     }
 }
