@@ -9,12 +9,10 @@ namespace KillerApp.Controllers
 {
     public class ProductController : Controller
     {
-        private Producten Producten = new Producten();
-        private Review review = new Review();
-        public List<Producten> ListWinkelmand { get; private set; }
         // GET: Product
         public ActionResult Product(string productNaam)
         {
+            Review review = new Review();
             ViewBag.Review = review.ReviewBijProduct(productNaam);
             ViewBag.Product = ProductBijNaam(productNaam);
             Session["ProductenWinkelmand"] = ProductBijNaam(productNaam);
@@ -37,7 +35,7 @@ namespace KillerApp.Controllers
                     ProductWinkelmand = new Producten();
                 }
             }
-            bestelling.ProductenWinkelmand.Add(ProductWinkelmand);
+            bestelling.ProductenWinkelmand.Add(ProductWinkelmand.ProductToevoegenWinkelmand(productNaam, specificatieID));
             Session["Bestelling"] = bestelling;
             Session["ProductenAantal"] = bestelling.ProductenWinkelmand.Count;
             Session["ListProducten"] = bestelling.ProductenWinkelmand;
@@ -49,6 +47,13 @@ namespace KillerApp.Controllers
             Review review = new Review(Convert.ToInt32(score),ReviewTekst,(int)Session["GebruikerID"],(int)Session["ProductID"]);
             review.ReviewPlaatsen(review);
             return RedirectToAction("Product", "Product", new { productID = (int)Session["ProductID"]});
+        }
+
+        public ActionResult Aanpassen(string productNaam, int specificatieID, int aantal)
+        {
+            Producten product = new Producten();
+            product.UpdateVoorraad(productNaam, specificatieID, aantal);
+            return RedirectToAction("Product", "Product", new { productNaam = productNaam });
         }
 
         public List<Producten> ProductBijNaam(string productNaam)

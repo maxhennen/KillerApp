@@ -33,9 +33,30 @@ namespace KillerApp.Data
             return bestellingen;
         }
 
-        public void Bestelling(List<Bestelling> producten)
+        public void Kopen(List<Producten> producten, int gebruikerID)
         {
+            string queryBestelling = "INSERT INTO Bestelling(Gebruiker_GebruikerID,DatumTijd)Values(@GebruikerID,@DatumTijd);";
+            string queryBestelregel = "INSERT INTO Bestelregel(Producten_ProductID,Bestelling_BestellingID,Specificaties_SpecificatieID)" +
+                "Values(@ProductID,(Select MAX(BestellingID)From Bestelling),@SpecificatieID);";
+            using (SqlConnection conn = Database.Connection)
+            {
+                using (SqlCommand cmd = new SqlCommand(queryBestelling, conn))
+                {
+                    cmd.Parameters.AddWithValue("@GebruikerID", gebruikerID);
+                    cmd.Parameters.AddWithValue("@DatumTijd", DateTime.Now);
+                    cmd.ExecuteNonQuery();
+                }
 
+                foreach (var item in producten)
+                {
+                    using (SqlCommand cmd = new SqlCommand(queryBestelregel, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ProductID", item.ProductID);
+                        cmd.Parameters.AddWithValue("SpecificatieID", item.SpecificatieID);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
         }
 
 

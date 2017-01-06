@@ -22,6 +22,11 @@ namespace KillerApp.Logic
             return Context.BestellingenGebruiker(gebruikerID);
         }
 
+        public void Kopen(List<Producten> producten, int gebruikerID)
+        {
+            Context.Kopen(producten, gebruikerID);
+        }
+
 
 
     }

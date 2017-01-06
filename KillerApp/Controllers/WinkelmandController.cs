@@ -9,37 +9,39 @@ namespace KillerApp.Controllers
 {
     public class WinkelmandController : Controller
     {
-        private List<Producten> ProductenWinkelmand;
-        private decimal Prijs;
         // GET: Winkelmand
         public ActionResult Winkelmand()
         {
-            ProductenWinkelmand = (List<Producten>)Session["ListProducten"];
-            ViewBag.Bestelling = ProductenWinkelmand;
-            
+            decimal Prijs = 0;
+            ViewBag.Bestelling = (List<Producten>)Session["ListProducten"];
+            foreach (var item in (List<Producten>)Session["ListProducten"])
+            {
+                Prijs = Prijs + item.Prijs;
+            }
+            ViewBag.TotaalPrijs = Prijs;
             return View();
         }
-        [HttpPost]
-        public ActionResult UpdateWinkelmand(List<Producten> bestelling)
-        {
-            foreach (var item in ProductenWinkelmand)
-            {
-                    Prijs = Prijs + item.Prijs * item.Aantal;
-            }
-            return RedirectToAction("Winkelmand", "Winkelmand");
-        }
 
+        public ActionResult Kopen()
+        {
+            Bestelling bestelling = new Bestelling();
+            bestelling.Kopen((List<Producten>)Session["ListProducten"], (int)Session["GebruikerID"]);
+            return RedirectToAction("Homepage", "Home");
+        }
+        
         public ActionResult VerwijderProduct(int productID)
         {
-            foreach (var item in ProductenWinkelmand)
+            List<Producten> Verwijderen = new List<Producten>();
+            Verwijderen = (List<Producten>)Session["ListProducten"];
+            foreach (var item in Verwijderen)
             {
-                    if (item.Product.ProductID == productID)
+                    if (item.ProductID == productID)
                     {
-                        ProductenWinkelmand.Remove(item);
+                        Verwijderen.Remove(item);
                         break;
                     }
             }
-            Session["ListProducten"] = ProductenWinkelmand;
+            Session["ListProducten"] = Verwijderen;
             return RedirectToAction("Winkelmand", "Winkelmand");
         }
     }

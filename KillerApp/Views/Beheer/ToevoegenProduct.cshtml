@@ -1,9 +1,8 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using (Html.BeginForm("Toevoegen", "Beheer",FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Toevoegen", "Beheer",FormMethod.Post, new { @class = "form-horizontal", role = "form" ,enctype = "multipart/form-data" }))
 {
-<form class="form-horizontal" role="form" action="/Beheer/Toevoegen">
     <fieldset>
         <!-- Form Name -->
         <legend>Product Toevoegen</legend>
@@ -134,5 +133,4 @@
             </div>
         </div>
     </fieldset>
-</form>
 }

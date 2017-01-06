@@ -106,7 +106,7 @@
                                     <li><a href="/MijnBestellingen/Index">Mijn Bestellingen</a></li>
                                     <li><a href="#">Contact</a></li>
                                     <li><a href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["ProductenAantal"]</a></li>
-                                    <li><p class="navbar-text">Welkom @Session["Gebruiker"]</p></li>
+                                    <li><p class="navbar-text">Welkom @Session["GebruikerNaam"]</p></li>
                                 </ul>
                                 <form method="post" id="loguit" class="navbar-form navbar-right" role="form" action="/Home/Loguit">
                                     <button type="submit" class="btn btn-primary">Loguit</button>
@@ -144,7 +144,7 @@
                                     <li><a href="/MijnBestellingen/Index">Mijn Bestellingen</a></li>
                                     <li><a href="#">Contact</a></li>
                                     <li><a href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["ProductenAantal"]</a></li>
-                                    <li><p class="navbar-text">Welkom @Session["Gebruiker"]</p></li>
+                                    <li><p class="navbar-text">Welkom @Session["GebruikerNaam"]</p></li>
                                 </ul>
                                 <form method="post" id="loguit" class="navbar-form navbar-right" role="form" action="/Home/Loguit">
                                     <button type="submit" class="btn btn-primary">Loguit</button>
@@ -153,13 +153,6 @@
                         </div>
                     </nav>
                 }
-
-        @if (Request.UrlReferrer != null)
-                {
-            <div class="text-right" >
-                <a href='javascript:history.go(-1)'>Terug</a>
-            </div>
-        }
         </header>
     
                 <!-- /.navbar-collapse -->

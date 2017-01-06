@@ -41,6 +41,16 @@ namespace KillerApp.Logic
         {
             Context.ProductToevoegen(product);
         }
+
+        public void UpdateVoorraad(string productNaam, int specificatieID,int aantal)
+        {
+            Context.UpdateVoorraad(productNaam, specificatieID, aantal);
+        }
+
+        public Producten ProductToevoegenWinkelmand(string productNaam, int specificatieID)
+        {
+            return Context.ProductToevoegenWinkelmand(productNaam, specificatieID);
+        }
     }
 }
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KillerApp.Models
 {
-    public class Producten : IComparable<string>, IComparable<double>
+    public class Producten 
     {
         public int ProductID { get; private set; }
         public string Naam { get; private set; }
@@ -90,14 +90,16 @@ namespace KillerApp.Models
             productenRepo.ProductToevoegen(product);
         }
 
-        public int CompareTo(string naam)
+        public void UpdateVoorraad(string productNaam, int specificatieID, int aantal)
         {
-            return Naam.CompareTo(Naam);
+            productenRepo = new ProductenRepository(new ProductenSQLContext());
+            productenRepo.UpdateVoorraad(productNaam, specificatieID, aantal);
         }
 
-        public int CompareTo(double prijs)
+        public Producten ProductToevoegenWinkelmand(string productNaam, int specificatieID)
         {
-            return Prijs.CompareTo(prijs);
+            productenRepo = new ProductenRepository(new ProductenSQLContext());
+            return productenRepo.ProductToevoegenWinkelmand(productNaam, specificatieID);
         }
     }
 }

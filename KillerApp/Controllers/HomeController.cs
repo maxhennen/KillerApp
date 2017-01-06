@@ -24,7 +24,7 @@ namespace KillerApp.Controllers
             Gebruiker = new Gebruiker(EmailText,WachtwoordText);
             Gebruiker = Gebruiker.Login(Gebruiker);
             Session["Header"] = Gebruiker.Gebruikerstype;
-            Session["Gebruiker"] = Gebruiker.Voornaam + " " + Gebruiker.Achternaam;
+            Session["GebruikerNaam"] = Gebruiker.Voornaam + " " + Gebruiker.Achternaam;
             Session["GebruikerID"] = Gebruiker.GebruikerID;
             return RedirectToAction("Homepage", "Home");
         }

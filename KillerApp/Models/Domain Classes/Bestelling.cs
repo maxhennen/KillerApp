@@ -31,10 +31,21 @@ namespace KillerApp.Models
             DatumTijd = datumTijd;
         }
 
+        public Bestelling(List<Producten> producten, int gebruikerID)
+        {
+
+        }
+
         public List<Bestelling> BestellingenGebruiker(int gebruikerID)
         {
             BestellingRepo = new BestellingRepository(new BestellingSQLContext());
             return BestellingRepo.BestellingenGebruiker(gebruikerID);
+        }
+
+        public void Kopen(List<Producten> producten, int gebruikerID)
+        {
+            BestellingRepo = new BestellingRepository(new BestellingSQLContext());
+            BestellingRepo.Kopen(producten, gebruikerID);
         }
     }
 }

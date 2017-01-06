@@ -9,7 +9,7 @@ namespace KillerApp.Interfaces
 {
     public interface IBestellingSQLContext
     {
-        void Bestelling(List<Bestelling> producten);
         List<Bestelling> BestellingenGebruiker(int gebruikerID);
+        void Kopen(List<Producten> producten, int gebruikerID);
     }
 }

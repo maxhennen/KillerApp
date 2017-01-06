@@ -148,7 +148,44 @@ namespace KillerApp.Data
             }
             return producten;
         }
-        
+
+        public void UpdateVoorraad(string productNaam, int specificatieID, int aantal)
+        {
+            string query = "update Voorraad set Aantal = @Aantal from Voorraad v join ProductSpecificatiesVoorraad ps on ps.Voorraad_VoorraadID =v.VoorraadID join Producten p on p.ProductID = ps.Producten_ProductID join Specificaties s on s.SpecificatieID = ps.Specificaties_SpecificatieID where p.Naam = @ProductNaam and s.SpecificatieID = @SpecificatieID;";
+            using(SqlConnection conn = Database.Connection)
+            {
+                using(SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Aantal", aantal);
+                    cmd.Parameters.AddWithValue("@ProductNaam", productNaam);
+                    cmd.Parameters.AddWithValue("@SpecificatieID", specificatieID);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public Producten ProductToevoegenWinkelmand(string productNaam, int specificatieID)
+        {
+            Producten product = new Producten();
+            string query = "Select p.*, s.*, v.Aantal From Producten p join ProductSpecificatiesVoorraad ps on ps.Producten_ProductID = p.ProductID join Specificaties s on s.SpecificatieID = ps.Specificaties_SpecificatieID join Voorraad v on v.VoorraadID = ps.Voorraad_VoorraadID where p.Naam = @ProductNaam and s.SpecificatieID = @SpecificatieID;";
+            using(SqlConnection conn = Database.Connection)
+            {
+                using(SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ProductNaam", productNaam);
+                    cmd.Parameters.AddWithValue("@SpecificatieID", specificatieID);
+                    using(SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            product = CreateProductFromReader(reader);
+                        }
+                    }
+                }
+            }
+            return product;
+        }
+
         public Producten CreateProductFromReader(SqlDataReader reader)
         {
                 if (reader["Telefoon_ProductID"] != DBNull.Value)

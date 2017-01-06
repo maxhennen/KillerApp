@@ -14,5 +14,7 @@ namespace KillerApp.Interfaces
         List<Producten> AlleAccessoires();
         List<Producten> ProductenHomepage();
         List<Producten> ProductBijNaam(string productNaam);
+        void UpdateVoorraad(string productNaam, int specificatieID, int aantal);
+        Producten ProductToevoegenWinkelmand(string productNaam, int specificatieID);
     }
 }
