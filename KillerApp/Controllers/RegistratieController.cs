@@ -16,13 +16,28 @@ namespace KillerApp.Controllers
             return View();
         }
 
-        public ActionResult RegistrerenKlant(string Voornaam, string Achternaam, string Email, string Wachtwoord, DateTime Geboortedatum,
-            string Straat, int Huisnummer, string Woonplaats, string Postcode, long Telefoonnummer,string gebruikerstype)
+        public ActionResult RegistrerenKlant(string Voornaam, string Achternaam, string Email, string Wachtwoord, string WachtwoordBevestigen,
+            DateTime Geboortedatum, string Straat, int Huisnummer, string Woonplaats, string Postcode, long Telefoonnummer,string gebruikerstype)
         {
-                Gebruiker gebruiker = new Gebruiker(Voornaam, Achternaam, Geboortedatum, Straat, Huisnummer, Postcode,
-                Woonplaats, Email, Telefoonnummer, Wachtwoord,"Klant");
-                gebruiker.Registreren(gebruiker);
-                return RedirectToAction("Homepage", "Home");
+            try
+            {
+                if (Wachtwoord != WachtwoordBevestigen)
+                {
+                    Session["Error"] = "Wachtwoordvelden komen niet overeen";
+                }
+                else
+                {
+                    Gebruiker gebruiker = new Gebruiker(0,Voornaam, Achternaam, Geboortedatum, Straat, Huisnummer, Postcode,
+                    Woonplaats,"", Email, Telefoonnummer, Wachtwoord, "Klant");
+                    gebruiker.Registreren(gebruiker);
+                    Session["Error"] = "Uw account is aangemaakt";
+                }
+            }
+            catch(SqlException)
+            {
+                Session["Error"] = "Het ingevoerde emailadres is al ingebruik";
+            }
+            return RedirectToAction("Registratie", "Registratie");
         }
     }
 }

@@ -38,6 +38,8 @@ namespace KillerApp.Data
             string queryBestelling = "INSERT INTO Bestelling(Gebruiker_GebruikerID,DatumTijd)Values(@GebruikerID,@DatumTijd);";
             string queryBestelregel = "INSERT INTO Bestelregel(Producten_ProductID,Bestelling_BestellingID,Specificaties_SpecificatieID)" +
                 "Values(@ProductID,(Select MAX(BestellingID)From Bestelling),@SpecificatieID);";
+            string queryUpdateVoorraad = "Update Voorraad Set Aantal = Aantal -1 From Voorraad v join ProductSpecificatiesVoorraad ps on ps.Voorraad_VoorraadID =v.VoorraadID join Producten p on p.ProductID = ps.Producten_ProductID join Specificaties s on s.SpecificatieID = ps.Specificaties_SpecificatieID where p.ProductID = @ProductID and s.SpecificatieID = @SpecificatieID;";
+
             using (SqlConnection conn = Database.Connection)
             {
                 using (SqlCommand cmd = new SqlCommand(queryBestelling, conn))
@@ -52,7 +54,14 @@ namespace KillerApp.Data
                     using (SqlCommand cmd = new SqlCommand(queryBestelregel, conn))
                     {
                         cmd.Parameters.AddWithValue("@ProductID", item.ProductID);
-                        cmd.Parameters.AddWithValue("SpecificatieID", item.SpecificatieID);
+                        cmd.Parameters.AddWithValue("@SpecificatieID", item.SpecificatieID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    using(SqlCommand cmd = new SqlCommand(queryUpdateVoorraad, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ProductID", item.ProductID);
+                        cmd.Parameters.AddWithValue("@SpecificatieID", item.SpecificatieID);
                         cmd.ExecuteNonQuery();
                     }
                 }

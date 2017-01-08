@@ -16,7 +16,6 @@ namespace KillerApp.Models
         public int KlantID { get; private set; }
         public string KlantNaam { get; private set; }
         public int ProductID { get; private set; }
-        public int GemiddeldeScore { get; private set; }
         public int VerschilDagen { get; private set; }
         public DateTime DatumTijd { get; private set; }
         private ReviewRepository ReviewRepo;
@@ -26,13 +25,12 @@ namespace KillerApp.Models
 
         }
 
-        public Review(int reviewID, int aantalSterren, string reviewTekst, string klantNaam, int productID, int gemiddeldeScore, DateTime datumTijd, int verschilDagen)
+        public Review(int reviewID, int aantalSterren, string reviewTekst, string klantNaam, int productID, DateTime datumTijd, int verschilDagen)
         {
             AantalSterren = aantalSterren;
             ReviewTekst = reviewTekst;
             KlantNaam = klantNaam;
             ProductID = productID;
-            GemiddeldeScore = gemiddeldeScore;
             DatumTijd = datumTijd;
             VerschilDagen = verschilDagen;
         }

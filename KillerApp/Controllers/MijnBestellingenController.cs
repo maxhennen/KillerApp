@@ -12,8 +12,16 @@ namespace KillerApp.Controllers
         // GET: Account
         public ActionResult Index()
         {
-            Bestelling bestelling = new Bestelling();
-            ViewBag.Bestellingen = bestelling.BestellingenGebruiker((int)Session["GebruikerID"]);
+            try
+            {
+                Bestelling bestelling = new Bestelling();
+                ViewBag.Bestellingen = bestelling.BestellingenGebruiker((int)Session["GebruikerID"]);
+            }
+            catch (NullReferenceException)
+            {
+                ViewBag.Error = "U heeft nog geen producten besteld";
+            }
+
             return View();
         }
     }

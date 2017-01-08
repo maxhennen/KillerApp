@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace KillerApp.Data
 {
-    class GebruikerSQLContext: IGebruikerSQLContext 
+    public class GebruikerSQLContext: IGebruikerSQLContext 
     {
         public void Registreren(Gebruiker gebruiker)
         {

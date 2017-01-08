@@ -45,7 +45,7 @@ namespace KillerApp.Models
             ProductID = productId;
             Naam = naam;
             Merk = merk;
-            TelefoonID = telefoonId;
+            TelefoonID = telefoonId; 
             Aantal = aantal;
             Soort = soort;
             SpecificatieID = specificatieID;
@@ -83,7 +83,7 @@ namespace KillerApp.Models
             productenRepo = new ProductenRepository(new ProductenSQLContext());
             return productenRepo.ProductBijNaam(productNaam);
         }
-
+         
         public void ProductToevoegen(Producten product)
         {
             productenRepo = new ProductenRepository(new ProductenSQLContext());

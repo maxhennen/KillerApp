@@ -3,25 +3,26 @@
 }
 
 <div class="container">
+    @ViewBag.Error
+    @if (ViewBag.Error == null)
+    {
     <div class="row">
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Product Name</th>
-                        <th>Full Name</th>
+                        <th>Product Naam</th>
+                        <th>Naam Koper</th>
                         <th>Email</th>
-                        <th>Date</th>
-                        <th>Price</th>
+                        <th>Datum</th>
+                        <th>Prijs</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in ViewBag.Bestellingen)
                     {
                     <tr>
-                        <td>@item.BestelregelID</td>
-                        <td><a href="@item.Product.Afbeeldingen" target="_blank">@item.Product.Naam</a></td>
+                        <td><img src="@item.Product.Afbeeldingen" style="width:50px; height:70px;"/>  @item.Product.Naam</td>
                         <td>@item.Gebruiker.Voornaam @item.Gebruiker.Achternaam</td>
                         <td>@item.Gebruiker.Mail</td>
                         <td>@item.DatumTijd</td>
@@ -32,5 +33,6 @@
             </table>
         </div>
     </div>
+    }
 </div>
 

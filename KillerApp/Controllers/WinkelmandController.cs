@@ -12,11 +12,19 @@ namespace KillerApp.Controllers
         // GET: Winkelmand
         public ActionResult Winkelmand()
         {
+
             decimal Prijs = 0;
-            ViewBag.Bestelling = (List<Producten>)Session["ListProducten"];
-            foreach (var item in (List<Producten>)Session["ListProducten"])
+            try
             {
-                Prijs = Prijs + item.Prijs;
+                ViewBag.Bestelling = (List<Producten>)Session["ListProducten"];
+                foreach (var item in (List<Producten>)Session["ListProducten"])
+                {
+                    Prijs = Prijs + item.Prijs;
+                }
+            }
+            catch(NullReferenceException)
+            {
+                ViewBag.Error = "Er zijn geen producten toegevoegd aan de winkelmand";
             }
             ViewBag.TotaalPrijs = Prijs;
             return View();
@@ -26,6 +34,7 @@ namespace KillerApp.Controllers
         {
             Bestelling bestelling = new Bestelling();
             bestelling.Kopen((List<Producten>)Session["ListProducten"], (int)Session["GebruikerID"]);
+            Session["Error"] = "Aankoop is bevestigd";
             return RedirectToAction("Homepage", "Home");
         }
         

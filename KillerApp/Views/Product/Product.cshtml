@@ -5,6 +5,8 @@
 <body>
       @foreach (var item in ViewBag.Product)
       {
+          Session["ProductID"] = @item.ProductID;
+          Session["ProductNaam"] = @item.Naam;
                 <div class="container">
                             <div class="row" style="margin-top:20px">
                                 <div class="col-sm-10">
@@ -21,7 +23,14 @@
                                     <span>Euro: @item.Prijs</span><br />
                                     <div class="wrapper">
                                         <div class="post-meta">
-                                            <a href="@Url.Action("Toevoegen","Product",new { productNaam = @item.Naam, specificatieID = @item.SpecificatieID})">Bestellen</a>
+                                            @if (@item.Aantal >= 1)
+                                            {
+                                            <a href="@Url.Action("Toevoegen", "Product", new { productNaam = @item.Naam, specificatieID = @item.SpecificatieID })">Bestellen</a>
+                                            }
+                                            else
+                                            {
+                                                <p>Product is niet meer op voorraad</p>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -39,7 +48,7 @@
 
                                     <div class="col-md-6">
                                         <div class="widget-area no-padding blank">
-                                            @if (Session["Gebruiker"] != null)
+                                            @if (Session["GebruikerID"] != null)
                                             {
                                                 <form method="post" id="login" class="review-block" role="form" action="@Url.Action("ReviewPlaatsen","Product")">
                                                     <div class="status-upload">

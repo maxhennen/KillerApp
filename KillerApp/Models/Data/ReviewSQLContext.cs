@@ -58,7 +58,6 @@ namespace KillerApp.Data
                 Convert.ToString(reader["ReviewTekst"]),
                 Convert.ToString(reader["Naam"]),
                 Convert.ToInt32(reader["Producten_ProductID"]),
-                Convert.ToInt32(reader["Gemiddelde"]),
                 Convert.ToDateTime(reader["DatumTijd"]),
                 Convert.ToInt32(reader["VerschilDagen"])
                 );

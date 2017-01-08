@@ -59,23 +59,6 @@ namespace KillerApp.Models
             Gebruikerstype = gebruikerstype;
         }
 
-        public Gebruiker(string voornaam, string achternaam, DateTime geboortedatum,
-            string straat, int huisnummer, string postcode, string woonplaats, string mail
-            , long telefoonnummer, string wachtwoord,string gebruikerstype)
-        {
-            Voornaam = voornaam;
-            Achternaam = achternaam;
-            Geboortedatum = geboortedatum;
-            Straat = straat;
-            Huisnummer = huisnummer;
-            Postcode = postcode;
-            Woonplaats = woonplaats;
-            Mail = mail;
-            Telefoonnummer = telefoonnummer;
-            Wachtwoord = wachtwoord;
-            Gebruikerstype = gebruikerstype;
-        }
-
         public Gebruiker Login(Gebruiker gebruiker)
         {
             GebruikerRepo = new GebruikerRepository(new GebruikerSQLContext());

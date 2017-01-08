@@ -31,11 +31,6 @@ namespace KillerApp.Models
             DatumTijd = datumTijd;
         }
 
-        public Bestelling(List<Producten> producten, int gebruikerID)
-        {
-
-        }
-
         public List<Bestelling> BestellingenGebruiker(int gebruikerID)
         {
             BestellingRepo = new BestellingRepository(new BestellingSQLContext());

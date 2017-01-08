@@ -51,8 +51,9 @@
                                             <li><a href="/Producten/Accessoires">Accessoires</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="/Contact/Index">Contact</a></li>
                                     <li><a href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["ProductenAantal"]</a></li>
+                                    <li><p class="navbar-text" style="color:red">@Session["Error"]</p></li>
                                 </ul>
                                 <form method="post" id="login" class="navbar-form navbar-right" role="form" action="/Home/Login">
                                     <div class="input-group">
@@ -104,9 +105,10 @@
                                         </ul>
                                     </li>
                                     <li><a href="/MijnBestellingen/Index">Mijn Bestellingen</a></li>
-                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="/Contact/Index">Contact</a></li>
                                     <li><a href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["ProductenAantal"]</a></li>
                                     <li><p class="navbar-text">Welkom @Session["GebruikerNaam"]</p></li>
+                                    <li><p class="navbar-text" style="color:red">@Session["Error"]</p></li>
                                 </ul>
                                 <form method="post" id="loguit" class="navbar-form navbar-right" role="form" action="/Home/Loguit">
                                     <button type="submit" class="btn btn-primary">Loguit</button>
@@ -142,9 +144,11 @@
                                         </ul>
                                     </li>
                                     <li><a href="/MijnBestellingen/Index">Mijn Bestellingen</a></li>
-                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="/Contact/Index">Contact</a></li>
                                     <li><a href="@Url.Action("Winkelmand","Winkelmand")">Winkelmand: @Session["ProductenAantal"]</a></li>
                                     <li><p class="navbar-text">Welkom @Session["GebruikerNaam"]</p></li>
+                                    <li><p class="navbar-text" style="color:red">@Session["Error"]</p></li>
+
                                 </ul>
                                 <form method="post" id="loguit" class="navbar-form navbar-right" role="form" action="/Home/Loguit">
                                     <button type="submit" class="btn btn-primary">Loguit</button>

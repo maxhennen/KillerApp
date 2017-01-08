@@ -1,6 +1,7 @@
 ﻿using KillerApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,27 +14,43 @@ namespace KillerApp.Controllers
         // GET: Home
         public ActionResult Homepage()
         {
-            Producten producten = new Producten();
-            ViewBag.Telefoons = producten.ProductenHomepage();
-            Session["ProductenAantal"] = 0;
-            return View();
+            try
+            {
+                Producten producten = new Producten();
+                ViewBag.Telefoons = producten.ProductenHomepage();
+                Session["ProductenAantal"] = 0;
+                return View();
+            }
+            catch(SqlException e)
+            {
+                return RedirectToAction("Index", "Error", new { error = e.Message });
+            }
         }
 
         public ActionResult Login(string EmailText, string WachtwoordText)
         {
-            Gebruiker = new Gebruiker(EmailText,WachtwoordText);
+            Gebruiker Gebruiker = new Gebruiker(EmailText,WachtwoordText);
             Gebruiker = Gebruiker.Login(Gebruiker);
-            Session["Header"] = Gebruiker.Gebruikerstype;
-            Session["GebruikerNaam"] = Gebruiker.Voornaam + " " + Gebruiker.Achternaam;
-            Session["GebruikerID"] = Gebruiker.GebruikerID;
+            if (Gebruiker.GebruikerID == 0)
+            {
+                Session["Error"] = "Email en/of Wachtwoord komen niet overeen";
+            }
+            else
+            {
+                Session["Error"] = "";
+                Session["Gebruiker"] = Gebruiker;
+                Session["Header"] = Gebruiker.Gebruikerstype;
+                Session["GebruikerNaam"] = Gebruiker.Voornaam + " " + Gebruiker.Achternaam;
+                Session["GebruikerID"] = Gebruiker.GebruikerID;
+            }
             return RedirectToAction("Homepage", "Home");
         }
 
         public ActionResult Loguit()
         {
-            Session["Gebruiker"] = null;
+            Session["GebruikerID"] = null;
             Session["Header"] = null;
-            Session["Producten"] = null;
+            Session["GebruikerNaam"] = null;
             return RedirectToAction("Homepage", "Home");
         }
     }

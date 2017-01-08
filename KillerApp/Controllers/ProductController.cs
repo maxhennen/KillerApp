@@ -1,6 +1,7 @@
 ﻿using KillerApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -44,9 +45,20 @@ namespace KillerApp.Controllers
 
         public ActionResult ReviewPlaatsen(string score, string ReviewTekst)
         {
-            Review review = new Review(Convert.ToInt32(score),ReviewTekst,(int)Session["GebruikerID"],(int)Session["ProductID"]);
-            review.ReviewPlaatsen(review);
-            return RedirectToAction("Product", "Product", new { productID = (int)Session["ProductID"]});
+            try
+            {
+                Review review = new Review(Convert.ToInt32(score), ReviewTekst, (int)Session["GebruikerID"], (int)Session["ProductID"]);
+                review.ReviewPlaatsen(review);
+            }
+            catch (SqlException)
+            {
+                Session["Error"] = "Review mag maar maximaal 150 tekens lang zijn";
+            }
+            catch (NullReferenceException)
+            {
+                Session["Error"] = "Score en/ of review is niet ingevoerd";
+            }
+            return RedirectToAction("Product","Product",new { productNaam = (string)Session["ProductNaam"]});
         }
 
         public ActionResult Aanpassen(string productNaam, int specificatieID, int aantal)
