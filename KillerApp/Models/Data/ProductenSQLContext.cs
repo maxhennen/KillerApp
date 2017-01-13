@@ -231,5 +231,10 @@ namespace KillerApp.Data
                 );
             }
         }
+
+        public Producten ProductToevoegenWinkelmandUnitTest(string productNaam, int specificatieID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

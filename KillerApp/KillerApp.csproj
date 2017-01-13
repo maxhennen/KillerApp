@@ -156,10 +156,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Data\Database.cs" />
+    <Compile Include="Models\Data\UnitTestContext.cs" />
     <Compile Include="Models\Interfaces\IProductenSQLContext.cs" />
     <Compile Include="Models\Interfaces\IBestellingSQLContext.cs" />
     <Compile Include="Models\Interfaces\IGebruikerSQLContext.cs" />
     <Compile Include="Models\Interfaces\IReviewSQLContext.cs" />
+    <Compile Include="Models\Interfaces\IUnitTest.cs" />
     <Compile Include="Models\Logic\ProductenRepository.cs" />
     <Compile Include="Models\Logic\BestellingRepository.cs" />
     <Compile Include="Models\Logic\GebruikerRepository.cs" />
